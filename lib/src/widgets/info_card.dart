@@ -32,7 +32,7 @@ class InfoCard<T> extends StatelessWidget {
         borderRadius: isRound ? BorderRadius.circular(20) : null,
         boxShadow: [
           BoxShadow(
-            color: theme.shadowColor.withOpacity(0.1),
+            color: theme.shadowColor.withValues(alpha: 26),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -80,7 +80,7 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
         borderRadius: isRound ? BorderRadius.circular(20) : null,
         boxShadow: [
           BoxShadow(
-            color: theme.shadowColor.withOpacity(0.1),
+            color: theme.shadowColor.withValues(alpha: 26),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
