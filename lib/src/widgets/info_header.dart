@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
+/// A header widget that displays a title and optional subtitle.
+/// This widget is typically used as part of an [InfoCard].
 class InfoHeader extends StatelessWidget {
   final String title;
   final String? subtitle;
   final Widget? trailing;
   final EdgeInsetsGeometry? padding;
   final Color? backgroundColor;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
 
   const InfoHeader({
     super.key,
@@ -14,6 +18,8 @@ class InfoHeader extends StatelessWidget {
     this.trailing,
     this.padding,
     this.backgroundColor,
+    this.titleStyle,
+    this.subtitleStyle,
   });
 
   @override
@@ -31,7 +37,7 @@ class InfoHeader extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: theme.textTheme.titleLarge?.copyWith(
+                  style: titleStyle ?? theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -39,7 +45,7 @@ class InfoHeader extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     subtitle!,
-                    style: theme.textTheme.bodyMedium?.copyWith(
+                    style: subtitleStyle ?? theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.onSurfaceVariant,
                     ),
                   ),

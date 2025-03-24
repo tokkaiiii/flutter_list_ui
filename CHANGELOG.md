@@ -1,8 +1,19 @@
 # Changelog
 
-## 1.0.0
+## 1.0.1
+- Added generic type support for `Info` and `InfoCard` widgets
+- Improved Material 3 design system integration
+- Added customizable styles for headers and list items
+- Enhanced documentation and examples
+- Fixed file naming to follow Dart style guide
+- Added shadow effects to cards
+- Improved padding and margin customization options
 
-Initial release of flutter_list_ui
+## 1.0.0
+- Initial release
+- Basic info card system with header and list components
+- Riverpod integration for state management
+- Basic customization options for colors and padding
 
 ### Features
 - Customizable list components
