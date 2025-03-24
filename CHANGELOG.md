@@ -1,11 +1,18 @@
 # Changelog
 
-## 1.0.5
+## 1.0.6
 - Improved border radius handling in InfoCard
 - Fixed header styling with rounded corners
 - Updated flutter_riverpod to version 2.5.1
 - Removed unnecessary Container widgets for better performance
 - Enhanced documentation for padding options
+
+## 1.0.5
+- Initial release with basic functionality
+- Added Info and InfoCard widgets
+- Added InfoHeader component
+- Added InfoList component
+- Added Riverpod integration
 
 ## 1.0.4
 - Initial release with basic functionality
