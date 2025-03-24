@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3
+- Added single import support for all components
+- Improved documentation with import examples
+- Enhanced package structure
+
 ## 1.0.2
 - Fixed layout issues in InfoList widget
 - Improved documentation and examples

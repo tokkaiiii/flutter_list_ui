@@ -30,7 +30,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_list_ui: ^1.0.0
+  flutter_list_ui: ^1.0.3
 ```
 
 ## Usage
@@ -38,11 +38,7 @@ dependencies:
 ### Basic Usage
 
 ```dart
-import 'package:flutter_list_ui/src/widgets/info.dart';
-import 'package:flutter_list_ui/src/widgets/info_card.dart';
-import 'package:flutter_list_ui/src/widgets/info_header.dart';
-import 'package:flutter_list_ui/src/widgets/info_list.dart';
-import 'package:flutter_list_ui/src/models/info_item.dart';
+import 'package:flutter_list_ui/flutter_list_ui.dart';
 
 class MyListView extends StatelessWidget {
   @override
@@ -98,6 +94,8 @@ class MyListView extends StatelessWidget {
 ### Using Custom Models
 
 ```dart
+import 'package:flutter_list_ui/flutter_list_ui.dart';
+
 class CustomItem {
   const CustomItem({
     required this.name,
@@ -166,6 +164,7 @@ class CustomListView extends StatelessWidget {
 ### Using with Riverpod
 
 ```dart
+import 'package:flutter_list_ui/flutter_list_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyInfoWithRiverpod extends InfoWithRiverpod {
@@ -241,4 +240,3 @@ Contributions are welcome! If you find a bug or want a feature, please feel free
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-# flutter_list_ui

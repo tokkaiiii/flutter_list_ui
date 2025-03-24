@@ -140,7 +140,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.1"
+    version: "1.0.2"
   flutter_riverpod:
     dependency: "direct main"
     description:
