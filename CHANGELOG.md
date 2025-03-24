@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0
+
+BREAKING CHANGES:
+* Converted InfoHeader to an abstract class for better customization
+* Moved existing implementation to StandardInfoHeader
+* Added InfoHeader.standard factory constructor
+* Improved documentation with examples
+
 ## 1.0.7
 - Added border control options to InfoCard and InfoCardWithRiverpod
 - Added showBorder property to control border visibility

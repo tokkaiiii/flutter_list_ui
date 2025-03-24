@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_list_ui/src/widgets/info.dart';
-import 'package:flutter_list_ui/src/widgets/info_card.dart';
-import 'package:flutter_list_ui/src/widgets/info_header.dart';
-import 'package:flutter_list_ui/src/widgets/info_list.dart';
-import 'package:flutter_list_ui/src/models/info_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_list_ui/flutter_list_ui.dart';
+import 'package:flutter_list_ui/src/models/info_item.dart';
 
 void main() {
   runApp(
@@ -34,8 +31,8 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: Scaffold(
-        body: MyInfo(),
+      home: const Scaffold(
+        body: const MyInfo(),
       ),
     );
   }
