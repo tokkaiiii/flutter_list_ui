@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'InfoHeader.dart';
-import 'InfoList.dart';
+import 'info_header.dart';
+import 'info_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class InfoCard extends StatelessWidget {
