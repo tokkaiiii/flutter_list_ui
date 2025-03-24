@@ -1,7 +1,7 @@
 name: flutter_list_ui
 description: "A collection of beautiful and reusable Flutter UI components with modern design patterns."
 version: 1.0.0
-homepage: https://github.com/yourusername/flutter_list_ui
+homepage: https://github.com/tokkaiiii/flutter_list_ui
 publish_to: https://pub.dev
 
 environment:
