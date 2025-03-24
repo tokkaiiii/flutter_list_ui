@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 /// You can either:
 /// 1. Use the default implementation with [InfoHeader.standard]
 /// 2. Create your own implementation by extending [InfoHeader]
+@immutable
 abstract class InfoHeader extends StatelessWidget {
   const InfoHeader({super.key});
 
@@ -20,31 +21,31 @@ abstract class InfoHeader extends StatelessWidget {
   /// )
   /// ```
   factory InfoHeader.standard({
+    Key? key,
     required String title,
     String? subtitle,
     Widget? trailing,
-    EdgeInsetsGeometry? padding,
-    Color? backgroundColor,
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
-    bool showBottomBorder = true,
-    Key? key,
+    Color? backgroundColor,
+    EdgeInsetsGeometry? padding,
   }) = StandardInfoHeader;
+
+  Widget build(BuildContext context);
 }
 
 /// The default implementation of [InfoHeader].
 /// Provides a standard header layout with title, optional subtitle, and trailing widget.
 class StandardInfoHeader extends InfoHeader {
   const StandardInfoHeader({
+    super.key,
     required this.title,
     this.subtitle,
     this.trailing,
-    this.padding,
-    this.backgroundColor,
     this.titleStyle,
     this.subtitleStyle,
-    this.showBottomBorder = true,
-    super.key,
+    this.backgroundColor,
+    this.padding = const EdgeInsets.all(16.0),
   });
 
   /// The title text to display
@@ -57,7 +58,7 @@ class StandardInfoHeader extends InfoHeader {
   final Widget? trailing;
 
   /// Padding around the header content
-  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry padding;
 
   /// Background color of the header
   final Color? backgroundColor;
@@ -68,23 +69,20 @@ class StandardInfoHeader extends InfoHeader {
   /// Style for the subtitle text
   final TextStyle? subtitleStyle;
 
-  /// Whether to show a border at the bottom of the header
-  final bool showBottomBorder;
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     
     return Container(
-      padding: padding ?? const EdgeInsets.all(16.0),
+      padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor,
-        border: showBottomBorder ? Border(
+        border: Border(
           bottom: BorderSide(
             color: theme.dividerColor,
             width: 1,
           ),
-        ) : null,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

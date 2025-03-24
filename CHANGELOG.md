@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+* Fix: Remove default values from factory constructor in InfoHeader
+* Fix: Make InfoHeader constructors const
+* Fix: Remove showBottomBorder from InfoHeader (now always shows border)
+
 ## 1.1.0
 
 BREAKING CHANGES:
