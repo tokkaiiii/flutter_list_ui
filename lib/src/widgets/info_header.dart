@@ -31,6 +31,7 @@ abstract class InfoHeader extends StatelessWidget {
     EdgeInsetsGeometry? padding,
   }) = StandardInfoHeader;
 
+  @override
   Widget build(BuildContext context);
 }
 
@@ -45,7 +46,7 @@ class StandardInfoHeader extends InfoHeader {
     this.titleStyle,
     this.subtitleStyle,
     this.backgroundColor,
-    this.padding = const EdgeInsets.all(16.0),
+    this.padding,
   });
 
   /// The title text to display
@@ -58,7 +59,7 @@ class StandardInfoHeader extends InfoHeader {
   final Widget? trailing;
 
   /// Padding around the header content
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
   /// Background color of the header
   final Color? backgroundColor;
@@ -74,7 +75,7 @@ class StandardInfoHeader extends InfoHeader {
     final theme = Theme.of(context);
     
     return Container(
-      padding: padding,
+      padding: padding ?? const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: backgroundColor,
         border: Border(

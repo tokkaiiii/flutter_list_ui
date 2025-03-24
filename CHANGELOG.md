@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2
+
+* Fix: Make InfoHeader.standard factory constructor parameters match StandardInfoHeader
+* Fix: Add @override annotation to build method
+* Fix: Make padding parameter nullable in StandardInfoHeader
+
 ## 1.1.1
 
 * Fix: Remove default values from factory constructor in InfoHeader
