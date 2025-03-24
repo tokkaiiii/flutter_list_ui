@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.7
+- Added border control options to InfoCard and InfoCardWithRiverpod
+- Added showBorder property to control border visibility
+- Added borderColor property to customize border color
+- Improved documentation for border customization
+
 ## 1.0.6
 - Improved border radius handling in InfoCard
 - Fixed header styling with rounded corners

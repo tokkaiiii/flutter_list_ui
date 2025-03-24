@@ -12,6 +12,8 @@ class InfoCard<T> extends StatelessWidget {
   final Color? backgroundColor;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
+  final bool showBorder;
+  final Color? borderColor;
 
   const InfoCard({
     super.key,
@@ -21,6 +23,8 @@ class InfoCard<T> extends StatelessWidget {
     this.backgroundColor,
     this.margin,
     this.padding,
+    this.showBorder = true,
+    this.borderColor,
   });
 
   @override
@@ -34,10 +38,10 @@ class InfoCard<T> extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor ?? theme.cardColor,
         borderRadius: borderRadius,
-        border: Border.all(
-          color: theme.dividerColor,
+        border: showBorder ? Border.all(
+          color: borderColor ?? theme.dividerColor,
           width: 1,
-        ),
+        ) : null,
       ),
       clipBehavior: isRound ? Clip.antiAlias : Clip.none,
       child: Column(
@@ -64,6 +68,8 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
   final Widget Function(BuildContext, WidgetRef)? builder;
+  final bool showBorder;
+  final Color? borderColor;
 
   const InfoCardWithRiverpod({
     super.key,
@@ -74,6 +80,8 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
     this.margin,
     this.padding,
     this.builder,
+    this.showBorder = true,
+    this.borderColor,
   });
 
   @override
@@ -91,10 +99,10 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
       decoration: BoxDecoration(
         color: backgroundColor ?? theme.cardColor,
         borderRadius: borderRadius,
-        border: Border.all(
-          color: theme.dividerColor,
+        border: showBorder ? Border.all(
+          color: borderColor ?? theme.dividerColor,
           width: 1,
-        ),
+        ) : null,
       ),
       clipBehavior: isRound ? Clip.antiAlias : Clip.none,
       child: Column(
