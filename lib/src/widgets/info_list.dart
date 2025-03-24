@@ -18,7 +18,7 @@ class InfoList<T> extends StatelessWidget {
     required this.buildItem,
     this.backgroundColor,
     this.contentPadding,
-    this.shrinkWrap = false,
+    this.shrinkWrap = true,
     this.separatorBuilder,
     this.physics,
   });
@@ -30,7 +30,7 @@ class InfoList<T> extends StatelessWidget {
     required List<InfoItemBase> items,
     Color? backgroundColor,
     EdgeInsetsGeometry? contentPadding,
-    bool shrinkWrap = false,
+    bool shrinkWrap = true,
     Widget Function(BuildContext, int)? separatorBuilder,
     ScrollPhysics? physics,
   }) {
@@ -62,7 +62,7 @@ class InfoList<T> extends StatelessWidget {
       color: backgroundColor,
       child: ListView.separated(
         shrinkWrap: shrinkWrap,
-        physics: physics ?? (shrinkWrap ? const NeverScrollableScrollPhysics() : null),
+        physics: physics ?? const NeverScrollableScrollPhysics(),
         padding: contentPadding ?? EdgeInsets.zero,
         itemCount: items.length,
         separatorBuilder: separatorBuilder ?? (context, index) => const Divider(height: 1),
