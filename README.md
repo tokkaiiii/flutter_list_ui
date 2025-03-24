@@ -15,6 +15,8 @@ and the Flutter guide for
 
 A beautiful and reusable Flutter UI components package with modern design patterns. This package provides customizable list-based UI components that are easy to integrate into your Flutter applications.
 
+![Example Image](https://github.com/user-attachments/assets/06aae649-3f2b-4d51-849b-6c480e69d2e1)
+
 ## Features
 
 - Modern Material 3 design system integration
@@ -23,6 +25,7 @@ A beautiful and reusable Flutter UI components package with modern design patter
 - Responsive layouts with proper constraints
 - Riverpod integration for state management
 - Zero dependencies on other UI packages
+- Flat design with customizable borders and colors
 
 ## Getting started
 
@@ -30,7 +33,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_list_ui: ^1.0.3
+  flutter_list_ui: ^1.0.4
 ```
 
 ## Usage
@@ -197,6 +200,7 @@ class InfoCard extends StatelessWidget {
   final Color? backgroundColor;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
+  final bool isRound;
 }
 ```
 

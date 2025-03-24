@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.4
+- Improved flat design for InfoCard and InfoHeader
+- Removed default elevation and background colors
+- Added border support for better visual separation
+- Updated documentation with example images
+- Enhanced customization options for styling
+
 ## 1.0.3
 - Added single import support for all components
 - Improved documentation with import examples

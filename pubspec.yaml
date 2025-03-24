@@ -1,6 +1,6 @@
 name: flutter_list_ui
 description: "A collection of beautiful and reusable Flutter UI components with modern design patterns. Features a flexible info card system with customizable headers and lists."
-version: 1.0.3
+version: 1.0.4
 homepage: https://github.com/tokkaiiii/flutter_list_ui
 
 environment:

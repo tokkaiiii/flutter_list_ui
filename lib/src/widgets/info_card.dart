@@ -11,6 +11,7 @@ class InfoCard<T> extends StatelessWidget {
   final bool isRound;
   final Color? backgroundColor;
   final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
 
   const InfoCard({
     super.key,
@@ -19,6 +20,7 @@ class InfoCard<T> extends StatelessWidget {
     this.isRound = false,
     this.backgroundColor,
     this.margin,
+    this.padding,
   });
 
   @override
@@ -26,21 +28,21 @@ class InfoCard<T> extends StatelessWidget {
     final theme = Theme.of(context);
     
     return Container(
-      margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0),
+      margin: margin,
+      padding: padding,
       decoration: BoxDecoration(
-        color: backgroundColor ?? theme.colorScheme.surface,
-        borderRadius: isRound ? BorderRadius.circular(20) : null,
-        boxShadow: [
-          BoxShadow(
-            color: theme.shadowColor.withValues(alpha: 26),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: backgroundColor ?? theme.cardColor,
+        border: Border.all(
+          color: theme.dividerColor,
+          width: 1,
+        ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [header, body],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          header,
+          body,
+        ],
       ),
     );
   }
@@ -53,6 +55,7 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
   final bool isRound;
   final Color? backgroundColor;
   final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
   final Widget Function(BuildContext, WidgetRef)? builder;
 
   const InfoCardWithRiverpod({
@@ -62,6 +65,7 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
     this.isRound = false,
     this.backgroundColor,
     this.margin,
+    this.padding,
     this.builder,
   });
 
@@ -74,21 +78,21 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
     final theme = Theme.of(context);
     
     return Container(
-      margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0),
+      margin: margin,
+      padding: padding,
       decoration: BoxDecoration(
-        color: backgroundColor ?? theme.colorScheme.surface,
-        borderRadius: isRound ? BorderRadius.circular(20) : null,
-        boxShadow: [
-          BoxShadow(
-            color: theme.shadowColor.withValues(alpha: 26),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: backgroundColor ?? theme.cardColor,
+        border: Border.all(
+          color: theme.dividerColor,
+          width: 1,
+        ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [header, body],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          header,
+          body,
+        ],
       ),
     );
   }

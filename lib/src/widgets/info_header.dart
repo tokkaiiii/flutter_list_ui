@@ -3,6 +3,17 @@ import 'package:flutter/material.dart';
 /// A header widget that displays a title and optional subtitle.
 /// This widget is typically used as part of an [InfoCard].
 class InfoHeader extends StatelessWidget {
+  const InfoHeader({
+    required this.title,
+    this.subtitle,
+    this.trailing,
+    this.padding,
+    this.backgroundColor,
+    this.titleStyle,
+    this.subtitleStyle,
+    super.key,
+  });
+
   final String title;
   final String? subtitle;
   final Widget? trailing;
@@ -11,25 +22,23 @@ class InfoHeader extends StatelessWidget {
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
 
-  const InfoHeader({
-    super.key,
-    required this.title,
-    this.subtitle,
-    this.trailing,
-    this.padding,
-    this.backgroundColor,
-    this.titleStyle,
-    this.subtitleStyle,
-  });
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     
     return Container(
-      color: backgroundColor,
       padding: padding ?? const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        border: Border(
+          bottom: BorderSide(
+            color: theme.dividerColor,
+            width: 1,
+          ),
+        ),
+      ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             child: Column(
@@ -37,26 +46,19 @@ class InfoHeader extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: titleStyle ?? theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: titleStyle ?? theme.textTheme.titleMedium,
                 ),
                 if (subtitle != null) ...[
                   const SizedBox(height: 4),
                   Text(
                     subtitle!,
-                    style: subtitleStyle ?? theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
+                    style: subtitleStyle ?? theme.textTheme.bodyMedium,
                   ),
                 ],
               ],
             ),
           ),
-          if (trailing != null) ...[
-            const SizedBox(width: 8),
-            trailing!,
-          ],
+          if (trailing != null) trailing!,
         ],
       ),
     );
