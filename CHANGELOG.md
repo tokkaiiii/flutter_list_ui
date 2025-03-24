@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2
+- Fixed layout issues in InfoList widget
+- Improved documentation and examples
+- Enhanced error handling
+
 ## 1.0.1
 - Added generic type support for `Info` and `InfoCard` widgets
 - Improved Material 3 design system integration
