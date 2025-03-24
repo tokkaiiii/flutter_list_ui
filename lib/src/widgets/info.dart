@@ -4,6 +4,10 @@ import 'info_card.dart';
 
 /// A widget that displays an [InfoCard] with customizable padding options.
 /// This widget is typically used as a container for information display.
+/// 
+/// The padding can be applied in two ways:
+/// - 'all': applies equal padding on all sides using [paddingVertical]
+/// - 'symmetric': applies [paddingVertical] and [paddingHorizontal] padding
 class Info extends StatelessWidget {
   final InfoCard card;
   final String paddingOption;
@@ -20,10 +24,7 @@ class Info extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    
-    return Container(
-      color: theme.colorScheme.surfaceVariant.withOpacity(0.5),
+    return Padding(
       padding: paddingOption == 'all' 
         ? EdgeInsets.all(paddingVertical)
         : EdgeInsets.symmetric(
@@ -37,6 +38,10 @@ class Info extends StatelessWidget {
 
 /// A Riverpod-enabled version of the [Info] widget.
 /// This widget provides the same functionality as [Info] but with Riverpod integration.
+/// 
+/// The padding can be applied in two ways:
+/// - 'all': applies equal padding on all sides using [paddingVertical]
+/// - 'symmetric': applies [paddingVertical] and [paddingHorizontal] padding
 class InfoWithRiverpod extends ConsumerStatefulWidget {
   final InfoCard card;
   final String paddingOption;
@@ -58,10 +63,7 @@ class InfoWithRiverpod extends ConsumerStatefulWidget {
 class _InfoWithRiverpodState extends ConsumerState<InfoWithRiverpod> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    
-    return Container(
-      color: theme.colorScheme.surfaceVariant.withOpacity(0.5),
+    return Padding(
       padding: widget.paddingOption == 'all' 
         ? EdgeInsets.all(widget.paddingVertical)
         : EdgeInsets.symmetric(

@@ -26,18 +26,20 @@ class InfoCard<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final borderRadius = isRound ? BorderRadius.circular(20) : null;
     
     return Container(
       margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0),
       padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor ?? theme.cardColor,
-        borderRadius: isRound ? BorderRadius.circular(20) : null,
+        borderRadius: borderRadius,
         border: Border.all(
           color: theme.dividerColor,
           width: 1,
         ),
       ),
+      clipBehavior: isRound ? Clip.antiAlias : Clip.none,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -50,6 +52,10 @@ class InfoCard<T> extends StatelessWidget {
 }
 
 /// A Riverpod version of [InfoCard] that can be used with state management.
+/// This widget provides the same functionality as [InfoCard] but with Riverpod integration.
+/// 
+/// The [isRound] property controls whether the card has rounded corners.
+/// When true, it applies a border radius of 20 and uses [Clip.antiAlias] for proper rendering.
 class InfoCardWithRiverpod<T> extends ConsumerWidget {
   final InfoHeader header;
   final InfoList<T> body;
@@ -77,18 +83,20 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
     }
 
     final theme = Theme.of(context);
+    final borderRadius = isRound ? BorderRadius.circular(20) : null;
     
     return Container(
       margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0),
       padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor ?? theme.cardColor,
-        borderRadius: isRound ? BorderRadius.circular(20) : null,
+        borderRadius: borderRadius,
         border: Border.all(
           color: theme.dividerColor,
           width: 1,
         ),
       ),
+      clipBehavior: isRound ? Clip.antiAlias : Clip.none,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

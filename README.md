@@ -13,29 +13,27 @@ and the Flutter guide for
 
 # Flutter List UI
 
-A collection of beautiful and reusable Flutter UI components with modern design patterns. Features a flexible info card system with customizable headers and lists.
+A beautiful and reusable Flutter UI components package with modern design patterns. This package provides customizable list-based UI components that are easy to integrate into your Flutter applications.
 
-![Example](https://github.com/user-attachments/assets/06aae649-3f2b-4d51-849b-6c480e69d2e1)
+![Example Image](https://github.com/user-attachments/assets/06aae649-3f2b-4d51-849b-6c480e69d2e1)
 
 ## Features
 
-- 🎨 Modern and clean design
-- 📱 Responsive layout
-- 🔧 Highly customizable components
-- 🎯 Type-safe with generics
-- 📦 Zero dependencies
-- 🎭 Support for custom models
-- 🎨 Flat design with customizable borders and colors
-- 📏 Flexible padding and margin controls
-- 🎯 Custom item builders and separators
+- Modern Material 3 design system integration
+- Flexible generic type support for list items
+- Extensive styling and customization options
+- Responsive layouts with proper constraints
+- Riverpod integration for state management
+- Zero dependencies on other UI packages
+- Flat design with customizable borders and colors
 
-## Getting Started
+## Getting started
 
 Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_list_ui: ^1.0.5
+  flutter_list_ui: ^1.0.4
 ```
 
 ## Usage
@@ -52,166 +50,198 @@ class MyListView extends StatelessWidget {
       card: InfoCard(
         header: InfoHeader(
           title: 'My List',
-          subtitle: 'Optional subtitle',
+          subtitle: 'A beautiful list example',
         ),
-        body: InfoList.info(
-          items: [
-            InfoItemBase(
+        body: InfoList(
+          items: const [
+            InfoItem(
               title: 'Item 1',
               subtitle: 'Description 1',
               icon: Icons.star,
+              onTap: null,
             ),
-            InfoItemBase(
+            InfoItem(
               title: 'Item 2',
               subtitle: 'Description 2',
               icon: Icons.favorite,
+              onTap: null,
             ),
           ],
+          backgroundColor: Colors.white,
+          buildItem: (item) => _buildItem(item),
         ),
+      ),
+    );
+  }
+
+  Widget _buildItem(InfoItem item) {
+    return Builder(
+      builder: (context) => ListTile(
+        title: Text(
+          item.title,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        subtitle: Text(
+          item.subtitle,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        leading: Icon(item.icon),
+        trailing: Icon(item.trailingIcon),
+        onTap: item.onTap,
       ),
     );
   }
 }
 ```
 
-### Custom Models
+### Using Custom Models
 
 ```dart
-class Patient {
-  final String name;
-  final String age;
-  final String diagnosis;
+import 'package:flutter_list_ui/flutter_list_ui.dart';
 
-  Patient({
+class CustomItem {
+  const CustomItem({
     required this.name,
-    required this.age,
-    required this.diagnosis,
+    required this.description,
+    this.isActive = false,
   });
+
+  final String name;
+  final String description;
+  final bool isActive;
 }
 
-class PatientInfo extends Info {
-  PatientInfo({super.key}) : super(
-    card: InfoCard(
-      header: InfoHeader(
-        title: 'Patient Information',
-        backgroundColor: Colors.white,
-      ),
-      body: InfoList<Patient>(
-        items: patients,
-        backgroundColor: Colors.white,
-        itemPadding: const EdgeInsets.all(16),
-        itemDecoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(color: Colors.grey[200]!),
-          ),
-        ),
-        buildItem: (patient) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(patient.name, style: TextStyle(fontWeight: FontWeight.bold)),
-            Text('Age: ${patient.age}'),
-            Text('Diagnosis: ${patient.diagnosis}'),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-```
-
-### With Riverpod
-
-```dart
-class PatientList extends ConsumerWidget {
+class CustomListView extends StatelessWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final patients = ref.watch(patientsProvider);
-
+  Widget build(BuildContext context) {
     return Info(
       card: InfoCard(
         header: InfoHeader(
-          title: 'Patients',
-          trailing: IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => ref.read(patientsProvider.notifier).addPatient(),
-          ),
+          title: 'Custom List',
+          subtitle: 'Using custom model',
         ),
-        body: InfoList<Patient>(
-          items: patients,
-          buildItem: (patient) => PatientListItem(patient: patient),
+        body: InfoList<CustomItem>(
+          items: const [
+            CustomItem(
+              name: 'Custom Item 1',
+              description: 'Description 1',
+              isActive: true,
+            ),
+            CustomItem(
+              name: 'Custom Item 2',
+              description: 'Description 2',
+              isActive: false,
+            ),
+          ],
+          backgroundColor: Colors.white,
+          buildItem: (item) => _buildItem(item),
         ),
       ),
     );
   }
+
+  Widget _buildItem(CustomItem item) {
+    return Builder(
+      builder: (context) => ListTile(
+        title: Text(
+          item.name,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: item.isActive ? Colors.blue : null,
+          ),
+
+        ),
+        subtitle: Text(
+          item.description,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        leading: Icon(
+          item.isActive ? Icons.check_circle : Icons.circle_outlined,
+          color: item.isActive ? Colors.blue : null,
+        ),
+        trailing: const Icon(Icons.chevron_right),
+      ),
+    );
+  }
+}
+```
+
+### Using with Riverpod
+
+```dart
+import 'package:flutter_list_ui/flutter_list_ui.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class MyInfoWithRiverpod extends InfoWithRiverpod {
+  MyInfoWithRiverpod({super.key}) : super(
+    card: MyInfoCard(),
+    paddingOption: 'all',
+    paddingVertical: 16.0,
+    paddingHorizontal: 16.0,
+  );
 }
 ```
 
 ## API Reference
 
-### Info
-The main container widget that provides the basic structure.
-
+### Info Widget
 ```dart
-Info({
-  required InfoCard card,
-  Key? key,
-})
+class Info extends StatelessWidget {
+  final InfoCard card;
+  final String paddingOption;
+  final double paddingVertical;
+  final double paddingHorizontal;
+}
 ```
 
-### InfoCard
-A card widget that contains a header and body.
-
+### InfoCard Widget
 ```dart
-InfoCard({
-  required InfoHeader header,
-  required Widget body,
-  Color? backgroundColor,
-  EdgeInsetsGeometry? margin,
-  EdgeInsetsGeometry? padding,
-  bool isRound = false,
-  Key? key,
-})
+class InfoCard extends StatelessWidget {
+  final InfoHeader header;
+  final Widget body;
+  final Color? backgroundColor;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
+  final bool isRound;
+}
 ```
 
-### InfoHeader
-A header widget with title and optional subtitle.
-
+### InfoHeader Widget
 ```dart
-InfoHeader({
-  required String title,
-  String? subtitle,
-  Widget? trailing,
-  EdgeInsetsGeometry? padding,
-  Color? backgroundColor,
-  TextStyle? titleStyle,
-  TextStyle? subtitleStyle,
-  bool showBottomBorder = true,
-  Key? key,
-})
+class InfoHeader extends StatelessWidget {
+  final String title;
+  final String? subtitle;
+  final Widget? trailing;
+  final EdgeInsetsGeometry? padding;
+  final Color? backgroundColor;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
+}
 ```
 
-### InfoList
-A list widget that displays items with consistent styling.
-
+### InfoList Widget
 ```dart
-InfoList<T>({
-  required List<T> items,
-  required Widget Function(T item) buildItem,
-  Color? backgroundColor,
-  EdgeInsetsGeometry? contentPadding,
-  bool shrinkWrap = true,
-  Widget Function(BuildContext, int)? separatorBuilder,
-  ScrollPhysics? physics,
-  EdgeInsetsGeometry? itemPadding,
-  BoxDecoration? itemDecoration,
-  Key? key,
-})
+class InfoList<T> extends StatelessWidget {
+  final List<T> items;
+  final Color? backgroundColor;
+  final Widget Function(T item) buildItem;
+  final EdgeInsetsGeometry? contentPadding;
+  final bool shrinkWrap;
+  final Widget Function(BuildContext, int)? separatorBuilder;
+  final ScrollPhysics? physics;
+}
 ```
+
+## Additional information
+
+For more examples, please refer to the example directory in the package repository.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! If you find a bug or want a feature, please feel free to:
+
+1. Open an issue
+2. Create a pull request
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
