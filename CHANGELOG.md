@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3
+
+* Fix: Update example to use StandardInfoHeader instead of InfoHeader
+
 ## 1.1.2
 
 * Fix: Make InfoHeader.standard factory constructor parameters match StandardInfoHeader

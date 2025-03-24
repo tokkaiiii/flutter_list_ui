@@ -54,7 +54,7 @@ class MyInfoCard extends InfoCard {
   );
 }
 
-class MyInfoHeader extends InfoHeader {
+class MyInfoHeader extends StandardInfoHeader {
   MyInfoHeader({super.key}) : super(
     title: 'My App',
     subtitle: 'Example of Info UI Package',
