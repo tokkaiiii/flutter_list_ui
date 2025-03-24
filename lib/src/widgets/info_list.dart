@@ -1,0 +1,75 @@
+import 'package:flutter/material.dart';
+import '../models/info_item.dart';
+
+/// A list widget that displays items with a consistent style.
+/// It can be used with any type of item, but provides a default builder for [InfoItemBase].
+class InfoList<T> extends StatelessWidget {
+  final List<T> items;
+  final Color? backgroundColor;
+  final Widget Function(T item) buildItem;
+  final EdgeInsetsGeometry? contentPadding;
+  final bool shrinkWrap;
+  final Widget Function(BuildContext, int)? separatorBuilder;
+  final ScrollPhysics? physics;
+
+  const InfoList({
+    super.key,
+    required this.items,
+    required this.buildItem,
+    this.backgroundColor,
+    this.contentPadding,
+    this.shrinkWrap = false,
+    this.separatorBuilder,
+    this.physics,
+  });
+
+  /// Creates a default [InfoList] that works with [InfoItemBase] items.
+  /// This is a convenience constructor that provides a default item builder.
+  static InfoList<InfoItemBase> info({
+    Key? key,
+    required List<InfoItemBase> items,
+    Color? backgroundColor,
+    EdgeInsetsGeometry? contentPadding,
+    bool shrinkWrap = false,
+    Widget Function(BuildContext, int)? separatorBuilder,
+    ScrollPhysics? physics,
+  }) {
+    return InfoList<InfoItemBase>(
+      key: key,
+      items: items,
+      backgroundColor: backgroundColor,
+      contentPadding: contentPadding,
+      shrinkWrap: shrinkWrap,
+      separatorBuilder: separatorBuilder,
+      physics: physics,
+      buildItem: (item) => _buildDefaultItem(item),
+    );
+  }
+
+  static Widget _buildDefaultItem(InfoItemBase item) {
+    return ListTile(
+      title: Text(item.title),
+      subtitle: Text(item.subtitle),
+      leading: item.icon != null ? Icon(item.icon) : null,
+      trailing: item.trailingIcon != null ? Icon(item.trailingIcon) : null,
+      onTap: item.onTap,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: backgroundColor,
+      child: ListView.separated(
+        shrinkWrap: shrinkWrap,
+        physics: physics ?? (shrinkWrap ? const NeverScrollableScrollPhysics() : null),
+        padding: contentPadding ?? EdgeInsets.zero,
+        itemCount: items.length,
+        separatorBuilder: separatorBuilder ?? (context, index) => const Divider(height: 1),
+        itemBuilder: (context, index) {
+          return buildItem(items[index]);
+        },
+      ),
+    );
+  }
+}
