@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5
+- Added support for custom item padding and decoration in InfoList
+- Added showBottomBorder option to InfoHeader
+- Improved documentation with more detailed examples
+- Enhanced flexibility for custom layouts and styles
+
 ## 1.0.4
 - Improved flat design for InfoCard and InfoHeader
 - Removed default elevation and background colors

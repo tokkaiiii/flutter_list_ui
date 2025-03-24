@@ -28,10 +28,11 @@ class InfoCard<T> extends StatelessWidget {
     final theme = Theme.of(context);
     
     return Container(
-      margin: margin,
+      margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0),
       padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor ?? theme.cardColor,
+        borderRadius: isRound ? BorderRadius.circular(20) : null,
         border: Border.all(
           color: theme.dividerColor,
           width: 1,
@@ -78,10 +79,11 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
     final theme = Theme.of(context);
     
     return Container(
-      margin: margin,
+      margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0),
       padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor ?? theme.cardColor,
+        borderRadius: isRound ? BorderRadius.circular(20) : null,
         border: Border.all(
           color: theme.dividerColor,
           width: 1,

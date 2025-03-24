@@ -11,6 +11,7 @@ class InfoHeader extends StatelessWidget {
     this.backgroundColor,
     this.titleStyle,
     this.subtitleStyle,
+    this.showBottomBorder = true,
     super.key,
   });
 
@@ -21,6 +22,7 @@ class InfoHeader extends StatelessWidget {
   final Color? backgroundColor;
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
+  final bool showBottomBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,12 @@ class InfoHeader extends StatelessWidget {
       padding: padding ?? const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: backgroundColor,
-        border: Border(
+        border: showBottomBorder ? Border(
           bottom: BorderSide(
             color: theme.dividerColor,
             width: 1,
           ),
-        ),
+        ) : null,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
