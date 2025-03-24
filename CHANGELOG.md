@@ -1,10 +1,14 @@
 # Changelog
 
-## 1.1.3
+## 1.1.4
 
 * Fix: Revert InfoHeader to concrete class and add InfoHeaderBase interface
 * Fix: Update InfoCard and InfoCardWithRiverpod to use InfoHeaderBase
 * Fix: Update example to use InfoHeader
+
+## 1.1.3
+
+* Fix: Update example to use StandardInfoHeader instead of InfoHeader
 
 ## 1.1.2
 
