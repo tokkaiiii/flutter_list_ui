@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// A card widget that displays a header and a list of items.
 /// The list can be of any type, but provides a default builder for [InfoItemBase].
 class InfoCard<T> extends StatelessWidget {
-  final InfoHeader header;
+  final InfoHeaderBase header;
   final InfoList<T> body;
   final bool isRound;
   final Color? backgroundColor;
@@ -61,7 +61,7 @@ class InfoCard<T> extends StatelessWidget {
 /// The [isRound] property controls whether the card has rounded corners.
 /// When true, it applies a border radius of 20 and uses [Clip.antiAlias] for proper rendering.
 class InfoCardWithRiverpod<T> extends ConsumerWidget {
-  final InfoHeader header;
+  final InfoHeaderBase header;
   final InfoList<T> body;
   final bool isRound;
   final Color? backgroundColor;

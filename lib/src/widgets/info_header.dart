@@ -1,44 +1,25 @@
 import 'package:flutter/material.dart';
 
-/// A header widget interface that can be implemented for custom headers.
-/// This widget is typically used as part of an [InfoCard].
-/// 
-/// You can either:
-/// 1. Use the default implementation with [InfoHeader.standard]
-/// 2. Create your own implementation by extending [InfoHeader]
+/// A base interface for custom header implementations.
+/// This interface is typically used when you need to create a completely custom header.
+/// For most cases, you should use [InfoHeader] instead.
 @immutable
-abstract class InfoHeader extends StatelessWidget {
-  const InfoHeader({super.key});
-
-  /// Creates a standard header with title and optional subtitle.
-  /// 
-  /// Example:
-  /// ```dart
-  /// InfoHeader.standard(
-  ///   title: 'My Header',
-  ///   subtitle: 'Optional subtitle',
-  ///   backgroundColor: Colors.white,
-  /// )
-  /// ```
-  factory InfoHeader.standard({
-    Key? key,
-    required String title,
-    String? subtitle,
-    Widget? trailing,
-    TextStyle? titleStyle,
-    TextStyle? subtitleStyle,
-    Color? backgroundColor,
-    EdgeInsetsGeometry? padding,
-  }) = StandardInfoHeader;
+abstract class InfoHeaderBase extends StatelessWidget {
+  const InfoHeaderBase({super.key});
 
   @override
   Widget build(BuildContext context);
 }
 
-/// The default implementation of [InfoHeader].
-/// Provides a standard header layout with title, optional subtitle, and trailing widget.
-class StandardInfoHeader extends InfoHeader {
-  const StandardInfoHeader({
+/// A header widget that can be used as part of an [InfoCard].
+/// This is the default implementation that provides a standard header layout.
+/// 
+/// You can either:
+/// 1. Use this class directly with its constructor
+/// 2. Create your own implementation by extending [InfoHeaderBase]
+@immutable
+class InfoHeader extends StatelessWidget {
+  const InfoHeader({
     super.key,
     required this.title,
     this.subtitle,
