@@ -13,6 +13,7 @@ class InfoList<T> extends StatelessWidget {
   final ScrollPhysics? physics;
   final EdgeInsetsGeometry? itemPadding;
   final BoxDecoration? itemDecoration;
+  final bool removeTopPadding;
 
   const InfoList({
     required this.items,
@@ -24,6 +25,7 @@ class InfoList<T> extends StatelessWidget {
     this.physics,
     this.itemPadding,
     this.itemDecoration,
+    this.removeTopPadding = false,
     super.key,
   });
 
@@ -37,6 +39,7 @@ class InfoList<T> extends StatelessWidget {
     bool shrinkWrap = true,
     Widget Function(BuildContext, int)? separatorBuilder,
     ScrollPhysics? physics,
+    bool removeTopPadding = false,
   }) {
     return InfoList<InfoItemBase>(
       key: key,
@@ -46,6 +49,7 @@ class InfoList<T> extends StatelessWidget {
       shrinkWrap: shrinkWrap,
       separatorBuilder: separatorBuilder,
       physics: physics,
+      removeTopPadding: removeTopPadding,
       buildItem: (item) => _buildDefaultItem(item),
     );
   }
@@ -62,23 +66,33 @@ class InfoList<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget listView = ListView.separated(
+      shrinkWrap: shrinkWrap,
+      physics: physics ?? const ClampingScrollPhysics(),
+      padding: contentPadding,
+      itemCount: items.length,
+      separatorBuilder: separatorBuilder ?? (context, index) => const Divider(height: 1),
+      itemBuilder: (context, index) {
+        final item = items[index];
+        return Container(
+          padding: itemPadding,
+          decoration: itemDecoration,
+          child: buildItem(item),
+        );
+      },
+    );
+
+    if (removeTopPadding) {
+      listView = MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: listView,
+      );
+    }
+
     return Container(
       color: backgroundColor,
-      child: ListView.separated(
-        shrinkWrap: shrinkWrap,
-        physics: physics ?? const NeverScrollableScrollPhysics(),
-        padding: contentPadding,
-        itemCount: items.length,
-        separatorBuilder: separatorBuilder ?? (context, index) => const Divider(height: 1),
-        itemBuilder: (context, index) {
-          final item = items[index];
-          return Container(
-            padding: itemPadding,
-            decoration: itemDecoration,
-            child: buildItem(item),
-          );
-        },
-      ),
+      child: listView,
     );
   }
 }
