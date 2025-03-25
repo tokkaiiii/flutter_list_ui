@@ -18,7 +18,7 @@ abstract class InfoHeaderBase extends StatelessWidget {
 /// 1. Use this class directly with its constructor
 /// 2. Create your own implementation by extending [InfoHeaderBase]
 @immutable
-class InfoHeader extends StatelessWidget {
+class InfoHeader extends InfoHeaderBase {
   const InfoHeader({
     super.key,
     required this.title,

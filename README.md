@@ -28,7 +28,14 @@ Add the package to your pubspec.yaml:
 
 ```yaml
 dependencies:
-  flutter_list_ui: ^1.1.0
+  flutter_list_ui: ^1.1.4
+  flutter_riverpod: ^2.5.1  # Required for InfoCardWithRiverpod
+```
+
+Or run the following command:
+```bash
+flutter pub add flutter_list_ui
+flutter pub add flutter_riverpod  # Required for InfoCardWithRiverpod
 ```
 
 ## Usage
@@ -38,7 +45,7 @@ dependencies:
 ```dart
 Info(
   card: InfoCard(
-    header: InfoHeader.standard(
+    header: InfoHeader(
       title: 'My Header',
       subtitle: 'Optional subtitle',
       backgroundColor: Colors.white,
@@ -54,12 +61,42 @@ Info(
 )
 ```
 
-### Custom Header Implementation
+### Riverpod Integration
 
-You can create your own header by extending the InfoHeader class:
+First, wrap your app with `ProviderScope`:
 
 ```dart
-class CustomHeader extends InfoHeader {
+void main() {
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
+}
+```
+
+Then use `InfoCardWithRiverpod`:
+
+```dart
+InfoWithRiverpod(
+  card: InfoCardWithRiverpod(
+    header: InfoHeader(
+      title: 'Riverpod Example',
+    ),
+    body: InfoList<String>(
+      items: ref.watch(itemsProvider),
+      buildItem: (item) => ListTile(title: Text(item)),
+    ),
+  ),
+)
+```
+
+### Custom Header Implementation
+
+You can create your own header by extending the InfoHeaderBase class:
+
+```dart
+class CustomHeader extends InfoHeaderBase {
   const CustomHeader({
     required this.title,
     required this.searchBar,
@@ -92,22 +129,6 @@ InfoCard(
     searchBar: SearchBar(),
   ),
   body: InfoList(...),
-)
-```
-
-### Riverpod Integration
-
-```dart
-InfoWithRiverpod(
-  card: InfoCardWithRiverpod(
-    header: InfoHeader.standard(
-      title: 'Riverpod Example',
-    ),
-    body: InfoList<String>(
-      items: ref.watch(itemsProvider),
-      buildItem: (item) => ListTile(title: Text(item)),
-    ),
-  ),
 )
 ```
 

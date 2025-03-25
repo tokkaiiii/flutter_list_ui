@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.5
+
+* Fix: Update InfoHeader to extend InfoHeaderBase
+* Doc: Add Riverpod installation guide to README
+* Doc: Update examples to use new InfoHeader API
+
 ## 1.1.4
 
 * Fix: Revert InfoHeader to concrete class and add InfoHeaderBase interface
