@@ -90,9 +90,15 @@ class InfoList<T> extends StatelessWidget {
       );
     }
 
-    return Container(
+    Widget result = Container(
       color: backgroundColor,
       child: listView,
     );
+
+    if (!shrinkWrap) {
+      result = Expanded(child: result);
+    }
+
+    return result;
   }
 }
