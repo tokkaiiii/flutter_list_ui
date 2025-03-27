@@ -1,6 +1,13 @@
 # Changelog
 
-## 1.1.5
+## 1.2.1
+
+* Feature: Add automatic Expanded wrapper for InfoList when shrinkWrap is false
+* Fix: Improve scroll behavior in InfoList
+* Fix: Resolve layout issues in InfoList
+* Doc: Update InfoList documentation with new features
+
+## 1.2.0
 
 * Fix: Update InfoHeader to extend InfoHeaderBase
 * Doc: Add Riverpod installation guide to README

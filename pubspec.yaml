@@ -1,6 +1,6 @@
 name: flutter_list_ui
 description: A Flutter package for creating beautiful and customizable list UIs with headers, cards, and more.
-version: 1.2.0
+version: 1.2.1
 homepage: https://github.com/tokkaiiii/flutter_list_ui
 
 environment:
