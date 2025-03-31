@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/info_item.dart';
 
 /// A list widget that displays items with a consistent style.
@@ -105,9 +106,9 @@ class InfoList<T> extends StatelessWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Center(
         child: SelectableText.rich(
-          const TextSpan(
+          TextSpan(
             text: 'Error: ',
-            style: TextStyle(color: Colors.red),
+            style: const TextStyle(color: Colors.red),
             children: [
               TextSpan(text: error.toString()),
             ],
