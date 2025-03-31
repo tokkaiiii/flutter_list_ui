@@ -105,7 +105,7 @@ class InfoList<T> extends StatelessWidget {
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Center(
         child: SelectableText.rich(
-          TextSpan(
+          const TextSpan(
             text: 'Error: ',
             style: TextStyle(color: Colors.red),
             children: [

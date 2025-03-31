@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_list_ui/flutter_list_ui.dart';
+import 'package:info_ui_package/info_ui_package.dart';
 
 void main() {
   test('adds one to input values', () {
-    // TODO: Add tests
+    // Add your tests here
   });
 }
