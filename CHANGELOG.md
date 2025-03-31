@@ -1,13 +1,22 @@
 # Changelog
 
-## 1.2.2
+## 1.2.3
 
-* Feature: Added AsyncValue support to InfoList widget
-* Feature: Added when constructor for handling AsyncValue data
-* Feature: Added SelectableText.rich for error messages
-* Doc: Updated documentation with AsyncValue examples
-* Doc: Added example screenshot
-* Fix: Improved error handling in AsyncValue support
+### Added
+- Added AsyncValue support to InfoList widget via `InfoList.when` constructor
+- Added automatic handling of loading and error states
+- Added SelectableText.rich for error messages
+- Added comprehensive documentation and examples
+- Added example screenshot
+
+### Changed
+- Updated documentation with AsyncValue examples
+- Improved error handling in AsyncValue support
+- Updated dependencies to latest versions
+
+### Dependencies
+- Added flutter_riverpod: ^2.5.1 (Required for AsyncValue support)
+- Added riverpod_annotation: ^2.3.5
 
 ## 1.2.1
 

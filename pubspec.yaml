@@ -1,6 +1,6 @@
 name: info_ui_package
 description: A Flutter package for creating beautiful and customizable list UIs with headers, cards, and more.
-version: 1.2.2
+version: 1.2.3
 homepage: https://github.com/tokkaiiii/info_ui_package
 
 environment:
