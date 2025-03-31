@@ -1,7 +1,8 @@
 name: flutter_list_ui
 description: A Flutter package that provides a set of UI components for displaying information in a consistent and beautiful way.
-publish_to: 'https://pub.dev'
 version: 1.2.3
+homepage: https://github.com/tokkaiiii/flutter_list_ui
+repository: https://github.com/tokkaiiii/flutter_list_ui
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
