@@ -1,28 +1,26 @@
 name: info_ui_package
-description: A Flutter package for creating beautiful and customizable list UIs with headers, cards, and more.
+description: A Flutter package that provides a set of UI components for displaying information in a consistent and beautiful way.
+publish_to: 'https://pub.dev'
 version: 1.2.3
-homepage: https://github.com/tokkaiiii/info_ui_package
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_riverpod: ^2.5.1
   flutter_screenutil: ^5.9.0
   google_fonts: ^6.1.0
   cached_network_image: ^3.3.1
-  flutter_riverpod: ^2.5.1
-  riverpod_annotation: ^2.3.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
-  build_runner: ^2.4.8
-  freezed_annotation: ^2.4.1
-  json_annotation: ^4.8.1
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

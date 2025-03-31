@@ -15,6 +15,8 @@ and the Flutter guide for
 
 A Flutter package that provides a set of UI components for displaying information in a consistent and beautiful way.
 
+![Example Image](https://github.com/user-attachments/assets/fa857d8e-14c2-435d-8971-f7589392b5e8)
+
 ## Features
 
 - `InfoList`: A flexible list widget that can display any type of data with consistent styling
@@ -29,7 +31,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  info_ui_package: ^1.2.3
+  info_ui_package: ^1.2.1
   flutter_riverpod: ^2.5.1  # Required for AsyncValue support
 ```
 
@@ -65,8 +67,6 @@ InfoList.when(
   ),
 )
 ```
-
-![InfoList Example](https://github.com/user-attachments/assets/3d90b563-8e08-4da4-ae5d-f9a6d8eabe84)
 
 ### Complete Example with InfoCard
 
@@ -144,3 +144,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## About
+
+A reusable Flutter UI components package

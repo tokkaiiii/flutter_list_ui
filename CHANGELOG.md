@@ -18,12 +18,16 @@
 - Added flutter_riverpod: ^2.5.1 (Required for AsyncValue support)
 - Added riverpod_annotation: ^2.3.5
 
-## 1.2.1
+## 1.2.2
+- Added support for custom item decorations
+- Improved error handling in AsyncValue support
+- Added new example with InfoCard usage
 
-* Feature: Add automatic Expanded wrapper for InfoList when shrinkWrap is false
-* Fix: Improve scroll behavior in InfoList
-* Fix: Resolve layout issues in InfoList
-* Doc: Update InfoList documentation with new features
+## 1.2.1
+- Initial release
+- Basic InfoList widget implementation
+- AsyncValue support for loading and error states
+- InfoCard and InfoHeader components
 
 ## 1.2.0
 
