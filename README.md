@@ -31,7 +31,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  info_ui_package: ^1.2.1
+  flutter_list_ui: ^1.2.4
   flutter_riverpod: ^2.5.1  # Required for AsyncValue support
 ```
 

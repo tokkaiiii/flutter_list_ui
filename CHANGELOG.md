@@ -1,22 +1,15 @@
 # Changelog
 
+## 1.2.4
+- Fixed code formatting issues
+- Improved documentation and examples
+- Removed unused file (info_ui_package.dart)
+- Updated package name references
+
 ## 1.2.3
-
-### Added
-- Added AsyncValue support to InfoList widget via `InfoList.when` constructor
-- Added automatic handling of loading and error states
-- Added SelectableText.rich for error messages
-- Added comprehensive documentation and examples
-- Added example screenshot
-
-### Changed
-- Updated documentation with AsyncValue examples
-- Improved error handling in AsyncValue support
-- Updated dependencies to latest versions
-
-### Dependencies
-- Added flutter_riverpod: ^2.5.1 (Required for AsyncValue support)
-- Added riverpod_annotation: ^2.3.5
+- Updated package documentation and examples
+- Fixed image display in README.md
+- Improved code formatting and structure
 
 ## 1.2.2
 - Added support for custom item decorations
