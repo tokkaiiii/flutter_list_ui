@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: const Scaffold(
-        body: const MyInfo(),
+      home: Scaffold(
+        body: MyInfo(),
       ),
     );
   }
@@ -66,14 +66,14 @@ class MyInfoList extends InfoList<InfoItem> {
   MyInfoList({super.key}) : super(
     items: const [
       InfoItem(
-        title: '제목 1',
-        subtitle: '부제목 1',
+        title: 'title 1',
+        subtitle: 'subtitle 1',
         icon: Icons.star,
         onTap: null, // Handle tap
       ),
       InfoItem(
-        title: '제목 2',
-        subtitle: '부제목 2',
+        title: 'title 2',
+        subtitle: 'subtitle 2',
         icon: Icons.favorite,
         onTap: null, // Handle tap
       ),

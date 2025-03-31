@@ -54,6 +54,69 @@ class InfoList<T> extends StatelessWidget {
     );
   }
 
+  /// Creates an [InfoList] that handles AsyncValue data.
+  /// This constructor automatically handles loading and error states.
+  /// 
+  /// Example:
+  /// ```dart
+  /// InfoList.when(
+  ///   value: patientData,
+  ///   buildItem: (patient) => _PatientInfoItem(patient: patient),
+  ///   shrinkWrap: false,
+  ///   physics: const BouncingScrollPhysics(),
+  ///   backgroundColor: AppColors.white,
+  ///   contentPadding: EdgeInsets.zero,
+  ///   itemDecoration: const BoxDecoration(
+  ///     border: Border(
+  ///       bottom: BorderSide(
+  ///         color: AppColors.gray100,
+  ///       ),
+  ///     ),
+  ///   ),
+  /// )
+  /// ```
+  /// 
+  /// ![InfoList Example](https://github.com/user-attachments/assets/3d90b563-8e08-4da4-ae5d-f9a6d8eabe84)
+  static Widget when<T>({
+    required AsyncValue<List<T>> value,
+    required Widget Function(T item) buildItem,
+    Color? backgroundColor,
+    EdgeInsetsGeometry? contentPadding,
+    bool shrinkWrap = true,
+    Widget Function(BuildContext, int)? separatorBuilder,
+    ScrollPhysics? physics,
+    EdgeInsetsGeometry? itemPadding,
+    BoxDecoration? itemDecoration,
+    bool removeTopPadding = false,
+  }) {
+    return value.when(
+      data: (items) => InfoList<T>(
+        items: items,
+        buildItem: buildItem,
+        backgroundColor: backgroundColor,
+        contentPadding: contentPadding,
+        shrinkWrap: shrinkWrap,
+        separatorBuilder: separatorBuilder,
+        physics: physics,
+        itemPadding: itemPadding,
+        itemDecoration: itemDecoration,
+        removeTopPadding: removeTopPadding,
+      ),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(
+        child: SelectableText.rich(
+          TextSpan(
+            text: 'Error: ',
+            style: TextStyle(color: Colors.red),
+            children: [
+              TextSpan(text: error.toString()),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   static Widget _buildDefaultItem(InfoItemBase item) {
     return ListTile(
       title: Text(item.title),

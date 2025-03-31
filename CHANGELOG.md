@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.2
+
+* Feature: Added AsyncValue support to InfoList widget
+* Feature: Added when constructor for handling AsyncValue data
+* Feature: Added SelectableText.rich for error messages
+* Doc: Updated documentation with AsyncValue examples
+* Doc: Added example screenshot
+* Fix: Improved error handling in AsyncValue support
+
 ## 1.2.1
 
 * Feature: Add automatic Expanded wrapper for InfoList when shrinkWrap is false
@@ -90,17 +99,21 @@ BREAKING CHANGES:
 - Improved padding and margin customization options
 
 ## 1.0.0
-- Initial release
-- Basic info card system with header and list components
-- Riverpod integration for state management
-- Basic customization options for colors and padding
+
+### Added
+- Initial release of info_ui_package
+- InfoList widget with AsyncValue support
+- InfoCard widget for consistent card layouts
+- InfoHeader widget for card headers
+- Support for customizable styling and layouts
+- Example documentation with screenshots
 
 ### Features
-- Customizable list components
-- Card layouts with headers
-- Responsive design support
-- Example application included
-- Modern UI design patterns
+- Flexible list widget that can display any type of data
+- Built-in support for AsyncValue data handling
+- Customizable styling options
+- Modern design with Material You support
+- Comprehensive documentation and examples
 
 ### Dependencies
 - flutter_screenutil: ^5.9.0

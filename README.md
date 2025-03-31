@@ -11,131 +11,105 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-# Flutter List UI
+# info_ui_package
 
-A collection of beautiful and reusable Flutter UI components with modern design patterns.
+A Flutter package that provides a set of UI components for displaying information in a consistent and beautiful way.
 
 ## Features
 
-* Flexible info card system with customizable headers and lists
-* Built-in Riverpod integration
-* Modern design with Material You support
-* Highly customizable components
+- `InfoList`: A flexible list widget that can display any type of data with consistent styling
+- `InfoCard`: A card widget that wraps content with a header and body
+- `InfoHeader`: A header widget for InfoCard with customizable title and style
+- Support for AsyncValue data handling
+- Customizable styling and layout options
 
 ## Getting started
 
-Add the package to your pubspec.yaml:
+Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_list_ui: ^1.1.4
-  flutter_riverpod: ^2.5.1  # Required for InfoCardWithRiverpod
-```
-
-Or run the following command:
-```bash
-flutter pub add flutter_list_ui
-flutter pub add flutter_riverpod  # Required for InfoCardWithRiverpod
+  info_ui_package: ^1.0.0
 ```
 
 ## Usage
 
-### Basic Usage
+### Basic InfoList Usage
+
+```dart
+InfoList(
+  items: yourItems,
+  buildItem: (item) => YourCustomItemWidget(item: item),
+)
+```
+
+### InfoList with AsyncValue
+
+```dart
+InfoList.when(
+  value: yourAsyncData,
+  buildItem: (item) => YourCustomItemWidget(item: item),
+  shrinkWrap: false,
+  physics: const BouncingScrollPhysics(),
+  backgroundColor: Colors.white,
+  contentPadding: EdgeInsets.zero,
+  itemDecoration: const BoxDecoration(
+    border: Border(
+      bottom: BorderSide(
+        color: Colors.grey,
+      ),
+    ),
+  ),
+)
+```
+
+![InfoList Example](https://github.com/user-attachments/assets/3d90b563-8e08-4da4-ae5d-f9a6d8eabe84)
+
+### InfoCard Usage
 
 ```dart
 Info(
   card: InfoCard(
     header: InfoHeader(
-      title: 'My Header',
-      subtitle: 'Optional subtitle',
+      title: 'Your Title',
+      titleStyle: Theme.of(context).textTheme.titleLarge,
       backgroundColor: Colors.white,
     ),
-    body: InfoList<String>(
-      items: ['Item 1', 'Item 2', 'Item 3'],
-      buildItem: (item) => ListTile(title: Text(item)),
-    ),
-    backgroundColor: Colors.white,
-    isRound: true,
-    showBorder: true,
+    body: YourContent(),
   ),
 )
 ```
 
-### Riverpod Integration
+## Additional Information
 
-First, wrap your app with `ProviderScope`:
+### InfoList Parameters
 
-```dart
-void main() {
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
-}
-```
+- `items`: List of items to display
+- `buildItem`: Function to build each item widget
+- `backgroundColor`: Background color of the list
+- `contentPadding`: Padding around the list content
+- `shrinkWrap`: Whether the list should shrink-wrap its content
+- `separatorBuilder`: Custom separator builder between items
+- `physics`: Scroll physics for the list
+- `itemPadding`: Padding for each item
+- `itemDecoration`: Decoration for each item container
+- `removeTopPadding`: Whether to remove top padding
 
-Then use `InfoCardWithRiverpod`:
+### InfoCard Parameters
 
-```dart
-InfoWithRiverpod(
-  card: InfoCardWithRiverpod(
-    header: InfoHeader(
-      title: 'Riverpod Example',
-    ),
-    body: InfoList<String>(
-      items: ref.watch(itemsProvider),
-      buildItem: (item) => ListTile(title: Text(item)),
-    ),
-  ),
-)
-```
+- `header`: InfoHeader widget for the card title
+- `body`: Content to display in the card body
 
-### Custom Header Implementation
+### InfoHeader Parameters
 
-You can create your own header by extending the InfoHeaderBase class:
-
-```dart
-class CustomHeader extends InfoHeaderBase {
-  const CustomHeader({
-    required this.title,
-    required this.searchBar,
-    super.key,
-  });
-
-  final String title;
-  final Widget searchBar;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: Theme.of(context).textTheme.titleLarge),
-          const SizedBox(height: 8),
-          searchBar,
-        ],
-      ),
-    );
-  }
-}
-
-// Usage
-InfoCard(
-  header: CustomHeader(
-    title: 'Search',
-    searchBar: SearchBar(),
-  ),
-  body: InfoList(...),
-)
-```
-
-## Additional information
-
-For more examples and detailed documentation, visit our [GitHub repository](https://github.com/tokkaiiii/flutter_list_ui).
+- `title`: Text to display in the header
+- `titleStyle`: Text style for the title
+- `backgroundColor`: Background color of the header
 
 ## Contributing
 
-Feel free to file issues and PRs! We welcome all contributions.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
