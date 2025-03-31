@@ -13,7 +13,7 @@ abstract class InfoHeaderBase extends StatelessWidget {
 
 /// A header widget that can be used as part of an [InfoCard].
 /// This is the default implementation that provides a standard header layout.
-/// 
+///
 /// You can either:
 /// 1. Use this class directly with its constructor
 /// 2. Create your own implementation by extending [InfoHeaderBase]
@@ -54,7 +54,7 @@ class InfoHeader extends InfoHeaderBase {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Container(
       padding: padding ?? const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
@@ -93,4 +93,3 @@ class InfoHeader extends InfoHeaderBase {
     );
   }
 }
-

@@ -45,4 +45,4 @@ class InfoItem extends InfoItemBase {
 
   @override
   final VoidCallback? onTap;
-} 
+}

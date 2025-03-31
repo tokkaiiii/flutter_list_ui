@@ -39,48 +39,52 @@ class MyApp extends StatelessWidget {
 }
 
 class MyInfo extends InfoWithRiverpod {
-  MyInfo({super.key}) : super(
-    card: MyInfoCard(),
-    paddingOption: 'all',
-    paddingVertical: 16.0,
-    paddingHorizontal: 16.0,
-  );
+  MyInfo({super.key})
+      : super(
+          card: MyInfoCard(),
+          paddingOption: 'all',
+          paddingVertical: 16.0,
+          paddingHorizontal: 16.0,
+        );
 }
 
 class MyInfoCard extends InfoCard {
-  MyInfoCard({super.key}) : super(
-    header: MyInfoHeader(),
-    body: MyInfoList(),
-  );
+  MyInfoCard({super.key})
+      : super(
+          header: MyInfoHeader(),
+          body: MyInfoList(),
+        );
 }
 
 class MyInfoHeader extends InfoHeader {
-  MyInfoHeader({super.key}) : super(
-    title: 'My App',
-    subtitle: 'Example of Info UI Package',
-  );
+  MyInfoHeader({super.key})
+      : super(
+          title: 'My App',
+          subtitle: 'Example of Info UI Package',
+        );
 }
 
 // Example 1: Using the default InfoList with InfoItem
 class MyInfoList extends InfoList<InfoItem> {
-  MyInfoList({super.key}) : super(
-    items: const [
-      InfoItem(
-        title: 'title 1',
-        subtitle: 'subtitle 1',
-        icon: Icons.star,
-        onTap: null, // Handle tap
-      ),
-      InfoItem(
-        title: 'title 2',
-        subtitle: 'subtitle 2',
-        icon: Icons.favorite,
-        onTap: null, // Handle tap
-      ),
-    ],
-    backgroundColor: Colors.white,
-    buildItem: (item) => _buildItem(item),
-  );
+  MyInfoList({super.key})
+      : super(
+          items: const [
+            InfoItem(
+              title: 'title 1',
+              subtitle: 'subtitle 1',
+              icon: Icons.star,
+              onTap: null, // Handle tap
+            ),
+            InfoItem(
+              title: 'title 2',
+              subtitle: 'subtitle 2',
+              icon: Icons.favorite,
+              onTap: null, // Handle tap
+            ),
+          ],
+          backgroundColor: Colors.white,
+          buildItem: (item) => _buildItem(item),
+        );
 
   static Widget _buildItem(InfoItem item) {
     return Builder(
@@ -115,22 +119,23 @@ class CustomItem {
 }
 
 class CustomInfoList extends InfoList<CustomItem> {
-  CustomInfoList({super.key}) : super(
-    items: const [
-      CustomItem(
-        name: 'Custom Item 1',
-        description: 'Description 1',
-        isActive: true,
-      ),
-      CustomItem(
-        name: 'Custom Item 2',
-        description: 'Description 2',
-        isActive: false,
-      ),
-    ],
-    backgroundColor: Colors.white,
-    buildItem: (item) => _buildItem(item),
-  );
+  CustomInfoList({super.key})
+      : super(
+          items: const [
+            CustomItem(
+              name: 'Custom Item 1',
+              description: 'Description 1',
+              isActive: true,
+            ),
+            CustomItem(
+              name: 'Custom Item 2',
+              description: 'Description 2',
+              isActive: false,
+            ),
+          ],
+          backgroundColor: Colors.white,
+          buildItem: (item) => _buildItem(item),
+        );
 
   static Widget _buildItem(CustomItem item) {
     return Builder(
@@ -138,8 +143,8 @@ class CustomInfoList extends InfoList<CustomItem> {
         title: Text(
           item.name,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: item.isActive ? Colors.blue : null,
-          ),
+                color: item.isActive ? Colors.blue : null,
+              ),
         ),
         subtitle: Text(
           item.description,

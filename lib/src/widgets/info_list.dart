@@ -57,7 +57,7 @@ class InfoList<T> extends StatelessWidget {
 
   /// Creates an [InfoList] that handles AsyncValue data.
   /// This constructor automatically handles loading and error states.
-  /// 
+  ///
   /// Example:
   /// ```dart
   /// InfoList.when(
@@ -76,7 +76,7 @@ class InfoList<T> extends StatelessWidget {
   ///   ),
   /// )
   /// ```
-  /// 
+  ///
   /// ![InfoList Example](https://github.com/user-attachments/assets/3d90b563-8e08-4da4-ae5d-f9a6d8eabe84)
   static Widget when<T>({
     required AsyncValue<List<T>> value,
@@ -135,7 +135,8 @@ class InfoList<T> extends StatelessWidget {
       physics: physics ?? const ClampingScrollPhysics(),
       padding: contentPadding,
       itemCount: items.length,
-      separatorBuilder: separatorBuilder ?? (context, index) => const Divider(height: 1),
+      separatorBuilder:
+          separatorBuilder ?? (context, index) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final item = items[index];
         return Container(

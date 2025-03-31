@@ -11,11 +11,11 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-# info_ui_package
+# flutter_list_ui
 
 A Flutter package that provides a set of UI components for displaying information in a consistent and beautiful way.
 
-![Example Image](https://github.com/user-attachments/assets/fa857d8e-14c2-435d-8971-f7589392b5e8)
+![Example Image](https://raw.githubusercontent.com/tokkaiiii/flutter_list_ui/main/assets/images/example.png)
 
 ## Features
 
