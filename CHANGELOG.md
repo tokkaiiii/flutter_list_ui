@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.5
+
+- Fixed image display issues in README.md
+- Improved documentation and examples
+- Updated package description
+
 ## 1.2.4
 - Fixed code formatting issues
 - Improved documentation and examples
