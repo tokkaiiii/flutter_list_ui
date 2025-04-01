@@ -15,7 +15,7 @@ and the Flutter guide for
 
 A Flutter package that provides a set of UI components for displaying information in a consistent and beautiful way.
 
-<img src="https://raw.githubusercontent.com/tokkaiiii/flutter_list_ui/main/assets/images/example.png" alt="Example Image">
+![Example Image](https://github.com/tokkaiiii/flutter_list_ui/blob/main/assets/images/example.png?raw=true)
 
 ## Features
 
