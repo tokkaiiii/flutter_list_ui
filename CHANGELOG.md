@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.6
+
+- Fixed image display issues in README.md for both GitHub and pub.dev
+- Updated image path to use absolute URL for better compatibility
+
 ## 1.2.5
 
 - Fixed image display issues in README.md
