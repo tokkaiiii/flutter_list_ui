@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.7
+
+- Fixed image URL in README.md to display correctly on GitHub and pub.dev
+
 ## 1.2.6
 
 - Fixed image display issues in README.md for both GitHub and pub.dev
