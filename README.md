@@ -11,9 +11,9 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-# flutter_list_ui
+# Flutter List UI
 
-A Flutter package that provides a set of UI components for displaying information in a consistent and beautiful way.
+A Flutter package that provides a collection of list-related widgets with consistent styling and behavior.
 
 <!--
 To update this image:
@@ -25,116 +25,284 @@ To update this image:
 
 ## Features
 
-- `InfoList`: A flexible list widget that can display any type of data with consistent styling
-- Built-in AsyncValue support for handling loading and error states
-- `InfoCard`: A card widget that wraps content with a header and body
-- `InfoHeader`: A header widget for InfoCard with customizable title and style
-- Support for customizable styling and layouts
+- `InfoList`: A flexible list widget that supports:
+  - Generic type support for any data model
+  - Empty state handling with customizable UI
+  - Skeleton loading UI with shimmer effect
+  - AsyncValue integration with Riverpod
+  - Custom item builders
+  - Custom separators
+  - Custom styling options
+- `InfoCard`: A card widget that wraps content with consistent styling
+- `InfoHeader`: A header widget for cards with title and optional actions
+- `InfoItemBase`: A base model for list items with common properties
 
-## Getting started
+## Getting Started
 
-Add this to your package's `pubspec.yaml` file:
+Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_list_ui: ^1.2.4
-  flutter_riverpod: ^2.5.1  # Required for AsyncValue support
+  flutter_list_ui: ^1.3.0
+  shimmer: ^3.0.0  # Optional: for skeleton loading effect
 ```
 
 ## Usage
 
-### Basic InfoList Usage
+### Basic List
 
 ```dart
-InfoList(
-  items: yourItems,
-  buildItem: (item) => YourCustomItemWidget(item: item),
-  backgroundColor: Colors.white,
-  contentPadding: EdgeInsets.zero,
-)
+InfoList.info(
+  items: items,
+  buildItem: (item) => ListTile(
+    title: Text(item.title),
+    subtitle: Text(item.subtitle),
+  ),
+);
 ```
 
-### InfoList with AsyncValue Support
+### With Empty State
+
+```dart
+InfoList.info(
+  items: items,
+  buildEmptyItem: (context, items) => Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.inbox_outlined,
+          size: 48,
+          color: Colors.grey[400],
+        ),
+        const SizedBox(height: 16),
+        Text(
+          '데이터가 없습니다',
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 16,
+          ),
+        ),
+      ],
+    ),
+  ),
+  buildItem: (item) => ListTile(
+    title: Text(item.title),
+    subtitle: Text(item.subtitle),
+  ),
+);
+```
+
+### With Skeleton Loading
+
+```dart
+InfoList.info(
+  items: items,
+  isLoading: true,
+  skeletonCount: 3,
+  skeletonBuilder: (context, index) => Container(
+    padding: const EdgeInsets.all(16),
+    child: Row(
+      children: [
+        Container(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                width: 150,
+                height: 16,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  ),
+);
+```
+
+### With Riverpod AsyncValue
 
 ```dart
 InfoList.when(
-  value: yourAsyncData,  // AsyncValue<List<YourType>>
-  buildItem: (item) => YourCustomItemWidget(item: item),
-  shrinkWrap: false,
-  physics: const BouncingScrollPhysics(),
-  backgroundColor: Colors.white,
-  contentPadding: EdgeInsets.zero,
-  itemDecoration: const BoxDecoration(
-    border: Border(
-      bottom: BorderSide(
-        color: Colors.grey,
+  value: itemsAsyncValue,
+  buildItem: (item) => ListTile(
+    title: Text(item.title),
+    subtitle: Text(item.subtitle),
+  ),
+  buildEmptyItem: (context, items) => Container(
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.search_off,
+          size: 48,
+          color: Colors.grey[400],
+        ),
+        const SizedBox(height: 16),
+        Text(
+          '검색 결과가 없습니다',
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 16,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          '다른 검색어를 시도해보세요',
+          style: TextStyle(
+            color: Colors.grey[500],
+            fontSize: 14,
+          ),
+        ),
+      ],
+    ),
+  ),
+);
+```
+
+### With Shimmer Effect
+
+```dart
+import 'package:shimmer/shimmer.dart';
+
+InfoList.info(
+  items: items,
+  isLoading: true,
+  skeletonBuilder: (context, index) => Shimmer.fromColors(
+    baseColor: Colors.grey[300]!,
+    highlightColor: Colors.grey[100]!,
+    child: Container(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  width: 150,
+                  height: 16,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     ),
   ),
-)
+);
 ```
 
-### Complete Example with InfoCard
+### With InfoCard
 
 ```dart
 Info(
   card: InfoCard(
     header: InfoHeader(
-      title: 'Patient Information',
+      title: 'List Title',
       titleStyle: Theme.of(context).textTheme.titleLarge,
-      backgroundColor: Colors.white,
     ),
-    body: InfoList.when(
-      value: patientData,  // AsyncValue<List<Patient>>
-      buildItem: (patient) => PatientInfoItem(patient: patient),
-      shrinkWrap: false,
-      physics: const BouncingScrollPhysics(),
-      backgroundColor: Colors.white,
-      contentPadding: EdgeInsets.zero,
-      itemDecoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.grey,
-          ),
-        ),
+    body: InfoList.info(
+      items: items,
+      buildItem: (item) => ListTile(
+        title: Text(item.title),
+        subtitle: Text(item.subtitle),
       ),
     ),
+    backgroundColor: Colors.white,
+    isRound: true,
+    showBorder: false,
   ),
-)
+);
 ```
 
 ## Additional Information
 
-### InfoList Parameters
+### InfoList Properties
 
-- `items`: List of items to display
-- `buildItem`: Function to build each item widget
-- `backgroundColor`: Background color of the list
-- `contentPadding`: Padding around the list content
-- `shrinkWrap`: Whether the list should shrink-wrap its content
-- `separatorBuilder`: Custom separator builder between items
-- `physics`: Scroll physics for the list
-- `itemPadding`: Padding for each item
-- `itemDecoration`: Decoration for each item container
-- `removeTopPadding`: Whether to remove top padding
+| Property | Type | Description |
+|----------|------|-------------|
+| items | List<T> | The list of items to display |
+| buildItem | Widget Function(T) | Function to build each item widget |
+| backgroundColor | Color? | Background color of the list |
+| contentPadding | EdgeInsetsGeometry? | Padding around the list content |
+| shrinkWrap | bool | Whether the list should shrink-wrap its content |
+| separatorBuilder | Widget Function(BuildContext, int)? | Function to build separator widgets |
+| physics | ScrollPhysics? | Scroll physics for the list |
+| itemPadding | EdgeInsetsGeometry? | Padding for each item |
+| itemDecoration | BoxDecoration? | Decoration for each item container |
+| removeTopPadding | bool | Whether to remove top padding |
+| emptyWidget | Widget? | Widget to show when items is empty |
+| isLoading | bool | Whether to show skeleton loading UI |
+| skeletonCount | int | Number of skeleton items to show |
+| skeletonBuilder | Widget Function(BuildContext, int)? | Function to build skeleton items |
+| buildEmptyItem | Widget Function(BuildContext, List<T>)? | Function to build empty state UI |
 
-### AsyncValue Support
+### InfoCard Properties
 
-The `InfoList.when` constructor automatically handles:
-- Loading state with a centered CircularProgressIndicator
-- Error state with a selectable error message
-- Data state with your custom item builder
+| Property | Type | Description |
+|----------|------|-------------|
+| header | InfoHeader? | Header widget for the card |
+| body | Widget | Main content of the card |
+| backgroundColor | Color? | Background color of the card |
+| isRound | bool | Whether to show rounded corners |
+| showBorder | bool | Whether to show border |
+| padding | EdgeInsetsGeometry? | Padding around the card content |
+| margin | EdgeInsetsGeometry? | Margin around the card |
 
-### InfoCard Parameters
+### InfoHeader Properties
 
-- `header`: InfoHeader widget for the card title
-- `body`: Content to display in the card body
-
-### InfoHeader Parameters
-
-- `title`: Text to display in the header
-- `titleStyle`: Text style for the title
-- `backgroundColor`: Background color of the header
+| Property | Type | Description |
+|----------|------|-------------|
+| title | String | Title text |
+| titleStyle | TextStyle? | Style for the title text |
+| actions | List<Widget>? | Action widgets to show in the header |
 
 ## Dependencies
 
@@ -142,6 +310,7 @@ The `InfoList.when` constructor automatically handles:
 - flutter_screenutil: ^5.9.0
 - google_fonts: ^6.1.0
 - cached_network_image: ^3.3.1
+- shimmer: ^3.0.0 (Optional: for skeleton loading effect)
 
 ## Contributing
 

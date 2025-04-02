@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0
+
+- Added `buildEmptyItem` parameter to `InfoList` for custom empty state UI
+- Improved documentation with more examples and detailed property descriptions
+- Added shimmer effect example for skeleton loading UI
+- Updated dependencies to latest versions
+
 ## 1.2.8
 
 - Updated image URL in README.md to use GitHub Issues image URL for better compatibility
