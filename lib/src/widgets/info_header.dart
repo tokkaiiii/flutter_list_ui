@@ -28,6 +28,8 @@ class InfoHeader extends InfoHeaderBase {
     this.subtitleStyle,
     this.backgroundColor,
     this.padding,
+    this.icon,
+    this.useSliver = false,
   });
 
   /// The title text to display
@@ -51,11 +53,17 @@ class InfoHeader extends InfoHeaderBase {
   /// Style for the subtitle text
   final TextStyle? subtitleStyle;
 
+  /// Optional icon to display before the title
+  final IconData? icon;
+
+  /// Whether to use a SliverToBoxAdapter for the header
+  final bool useSliver;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
+    final content = Container(
       padding: padding ?? const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: backgroundColor,
@@ -69,19 +77,25 @@ class InfoHeader extends InfoHeaderBase {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          if (icon != null) ...[
+            Icon(icon, size: 24),
+            const SizedBox(width: 16),
+          ],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: titleStyle ?? theme.textTheme.titleMedium,
+                  style: titleStyle ?? theme.textTheme.titleLarge,
                 ),
                 if (subtitle != null) ...[
                   const SizedBox(height: 4),
                   Text(
                     subtitle!,
-                    style: subtitleStyle ?? theme.textTheme.bodyMedium,
+                    style: subtitleStyle ?? theme.textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ],
@@ -91,5 +105,11 @@ class InfoHeader extends InfoHeaderBase {
         ],
       ),
     );
+
+    if (useSliver) {
+      return SliverToBoxAdapter(child: content);
+    }
+
+    return content;
   }
 }

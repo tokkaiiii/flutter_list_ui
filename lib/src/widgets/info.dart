@@ -1,76 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'info_card.dart';
+import 'info_list.dart';
 
-/// A widget that displays an [InfoCard] with customizable padding options.
-/// This widget is typically used as a container for information display.
-///
-/// The padding can be applied in two ways:
-/// - 'all': applies equal padding on all sides using [paddingVertical]
-/// - 'symmetric': applies [paddingVertical] and [paddingHorizontal] padding
+/// A widget that combines [InfoCard] and [InfoList] with consistent styling.
 class Info extends StatelessWidget {
-  final InfoCard card;
-  final String paddingOption;
-  final double paddingVertical;
-  final double paddingHorizontal;
+  final Widget? card;
+  final Widget? body;
+  final EdgeInsetsGeometry? padding;
+  final bool useSliver;
+  final bool showDivider;
 
   const Info({
+    this.card,
+    this.body,
+    this.padding,
+    this.useSliver = false,
+    this.showDivider = false,
     super.key,
-    required this.card,
-    this.paddingOption = 'all',
-    this.paddingVertical = 8.0,
-    this.paddingHorizontal = 8.0,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: paddingOption == 'all'
-          ? EdgeInsets.all(paddingVertical)
-          : EdgeInsets.symmetric(
-              vertical: paddingVertical,
-              horizontal: paddingHorizontal,
-            ),
-      child: card,
+    final content = Column(
+      children: [
+        if (card != null) card!,
+        if (showDivider && card != null && body != null)
+          const Divider(height: 1),
+        if (body != null) body!,
+      ],
     );
+
+    final paddedContent = Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: content,
+    );
+
+    if (useSliver) {
+      return SliverToBoxAdapter(child: paddedContent);
+    }
+
+    return paddedContent;
   }
 }
 
-/// A Riverpod-enabled version of the [Info] widget.
-/// This widget provides the same functionality as [Info] but with Riverpod integration.
-///
-/// The padding can be applied in two ways:
-/// - 'all': applies equal padding on all sides using [paddingVertical]
-/// - 'symmetric': applies [paddingVertical] and [paddingHorizontal] padding
-class InfoWithRiverpod extends ConsumerStatefulWidget {
-  final InfoCard card;
-  final String paddingOption;
-  final double paddingVertical;
-  final double paddingHorizontal;
+/// A Riverpod-aware version of [Info].
+class InfoWithRiverpod extends ConsumerWidget {
+  final Widget? card;
+  final Widget? body;
+  final EdgeInsetsGeometry? padding;
+  final bool useSliver;
+  final bool showDivider;
 
   const InfoWithRiverpod({
+    this.card,
+    this.body,
+    this.padding,
+    this.useSliver = false,
+    this.showDivider = false,
     super.key,
-    required this.card,
-    this.paddingOption = 'all',
-    this.paddingVertical = 8.0,
-    this.paddingHorizontal = 8.0,
   });
 
   @override
-  ConsumerState<InfoWithRiverpod> createState() => _InfoWithRiverpodState();
-}
-
-class _InfoWithRiverpodState extends ConsumerState<InfoWithRiverpod> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: widget.paddingOption == 'all'
-          ? EdgeInsets.all(widget.paddingVertical)
-          : EdgeInsets.symmetric(
-              vertical: widget.paddingVertical,
-              horizontal: widget.paddingHorizontal,
-            ),
-      child: widget.card,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final content = Column(
+      children: [
+        if (card != null) card!,
+        if (showDivider && card != null && body != null)
+          const Divider(height: 1),
+        if (body != null) body!,
+      ],
     );
+
+    final paddedContent = Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: content,
+    );
+
+    if (useSliver) {
+      return SliverToBoxAdapter(child: paddedContent);
+    }
+
+    return paddedContent;
   }
 }

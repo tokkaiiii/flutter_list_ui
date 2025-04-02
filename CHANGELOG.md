@@ -1,5 +1,41 @@
 # Changelog
 
+## 1.3.3
+- Added example with long text support in InfoList
+- Improved documentation for horizontal scrolling text
+- Updated example app to demonstrate text overflow handling
+
+## 1.3.2
+- Fixed InfoHeader widget to support icon parameter
+- Improved UI consistency between sliver and non-sliver modes
+- Added proper error handling for missing parameters
+
+## 1.3.1
+- Added support for horizontal scrolling in InfoList items
+- Improved text overflow handling in InfoHeader
+- Enhanced documentation with examples
+
+## 1.3.0
+- Added sliver mode support for InfoCard and InfoList
+- Improved performance with const constructors
+- Enhanced documentation with sliver examples
+
+## 1.2.0
+- Added Info widget for consistent styling
+- Improved theme support
+- Enhanced documentation
+
+## 1.1.0
+- Added InfoCard widget
+- Improved InfoHeader widget
+- Enhanced documentation
+
+## 1.0.0
+- Initial release
+- Added InfoList widget
+- Added InfoHeader widget
+- Added InfoItem model
+
 ## 1.3.2
 
 * Improved UI consistency between sliver and non-sliver modes in InfoList
