@@ -80,39 +80,42 @@ class MyInfo extends StatelessWidget {
               ),
             ],
             useSliver: true,
-            buildItem: (item) => SizedBox(
-              width: 300,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Row(
-                  children: [
-                    Icon(
-                      item.isActive ? Icons.check_circle : Icons.circle_outlined,
-                      color: item.isActive ? Colors.blue : null,
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
+            buildItem: (item) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Row(
+                children: [
+                  Icon(
+                    item.isActive ? Icons.check_circle : Icons.circle_outlined,
+                    color: item.isActive ? Colors.blue : null,
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
                             item.name,
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                   color: item.isActive ? Colors.blue : null,
                                 ),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
+                        ),
+                        const SizedBox(height: 4),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
                             item.description,
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 16),
-                    const Icon(Icons.chevron_right),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 16),
+                  const Icon(Icons.chevron_right),
+                ],
               ),
             ),
           ),
@@ -157,22 +160,43 @@ class MyInfo extends StatelessWidget {
               ),
             ],
             useSliver: true,
-            buildItem: (item) => ListTile(
-              title: Text(
-                item.name,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: item.isActive ? Colors.blue : null,
+            buildItem: (item) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Row(
+                children: [
+                  Icon(
+                    item.isActive ? Icons.check_circle : Icons.circle_outlined,
+                    color: item.isActive ? Colors.blue : null,
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            item.name,
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: item.isActive ? Colors.blue : null,
+                                ),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            item.description,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                      ],
                     ),
+                  ),
+                  const SizedBox(width: 16),
+                  const Icon(Icons.chevron_right),
+                ],
               ),
-              subtitle: Text(
-                item.description,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              leading: Icon(
-                item.isActive ? Icons.check_circle : Icons.circle_outlined,
-                color: item.isActive ? Colors.blue : null,
-              ),
-              trailing: const Icon(Icons.chevron_right),
             ),
           ),
         ),
@@ -299,6 +323,76 @@ class MyInfo extends StatelessWidget {
               trailing: Icon(
                 Icons.chevron_right,
                 color: item.isActive ? Colors.blue : Colors.grey,
+              ),
+            ),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.all(16.0),
+          sliver: SliverToBoxAdapter(
+            child: Text(
+              'Vertical List with Horizontal Scroll',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          sliver: CustomInfoList(
+            items: const [
+              CustomItem(
+                name: 'First Item with Very Long Title That Should Scroll Horizontally When Text is Too Long to Fit in One Line',
+                description: 'This is a very long description that should make the item wider and enable horizontal scrolling. The text will continue to be very long and will require horizontal scrolling within the item itself.',
+                isActive: true,
+              ),
+              CustomItem(
+                name: 'Second Item with Another Very Long Title That Should Scroll Horizontally When Text is Too Long to Fit in One Line',
+                description: 'Another long description to make the item wider and ensure horizontal scrolling works properly. This is a very long text that will definitely require horizontal scrolling within the item.',
+                isActive: false,
+              ),
+              CustomItem(
+                name: 'Third Item with Yet Another Very Long Title That Should Scroll Horizontally When Text is Too Long to Fit in One Line',
+                description: 'Yet another long description to demonstrate horizontal scrolling functionality. The text is intentionally made very long to show the horizontal scrolling behavior within each item.',
+                isActive: true,
+              ),
+            ],
+            useSliver: true,
+            buildItem: (item) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Row(
+                children: [
+                  Icon(
+                    item.isActive ? Icons.check_circle : Icons.circle_outlined,
+                    color: item.isActive ? Colors.blue : null,
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            item.name,
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: item.isActive ? Colors.blue : null,
+                                ),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Text(
+                            item.description,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  const Icon(Icons.chevron_right),
+                ],
               ),
             ),
           ),
