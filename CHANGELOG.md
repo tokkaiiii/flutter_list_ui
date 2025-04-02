@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.2
+
+* Improved UI consistency between sliver and non-sliver modes in InfoList
+* Enhanced horizontal scrolling for long text in list items
+* Fixed layout issues in sliver mode
+* Updated example to demonstrate improved sliver functionality
+
 ## 1.3.1
 
 * Added `useSliver` parameter to `InfoList` and `InfoCard` for better scroll performance
@@ -187,3 +194,14 @@ BREAKING CHANGES:
 * Added InfoHeader widget
 * Added InfoList widget
 * Added Info widget
+
+## 0.0.2
+
+* Added support for sliver mode in InfoList widget
+* Improved UI consistency between sliver and non-sliver modes
+* Enhanced horizontal scrolling for long text in list items
+* Updated example to demonstrate sliver functionality
+
+## 0.0.1
+
+* Initial release

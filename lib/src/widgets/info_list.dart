@@ -168,8 +168,14 @@ class InfoList<T> extends StatelessWidget {
 
   static Widget _buildDefaultItem(InfoItemBase item) {
     return ListTile(
-      title: Text(item.title),
-      subtitle: Text(item.subtitle),
+      title: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Text(item.title),
+      ),
+      subtitle: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Text(item.subtitle),
+      ),
       leading: item.icon != null ? Icon(item.icon) : null,
       trailing: item.trailingIcon != null ? Icon(item.trailingIcon) : null,
       onTap: item.onTap,
@@ -273,36 +279,7 @@ class InfoList<T> extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context) {
-    if (useSliver) {
-      return SliverList(
-        delegate: SliverChildListDelegate([
-          LayoutBuilder(
-            builder: (context, constraints) {
-              return SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minWidth: constraints.maxWidth,
-                  ),
-                  child: Row(
-                    children: items.map((item) => SizedBox(
-                      width: 300,
-                      child: Container(
-                        padding: itemPadding,
-                        decoration: itemDecoration,
-                        child: buildItem(item),
-                      ),
-                    )).toList(),
-                  ),
-                ),
-              );
-            },
-          ),
-        ]),
-      );
-    }
-
-    Widget listView = ListView.separated(
+    Widget listContent = ListView.separated(
       shrinkWrap: shrinkWrap,
       physics: physics ?? const ClampingScrollPhysics(),
       padding: contentPadding,
@@ -319,20 +296,24 @@ class InfoList<T> extends StatelessWidget {
     );
 
     if (removeTopPadding) {
-      listView = MediaQuery.removePadding(
+      listContent = MediaQuery.removePadding(
         context: context,
         removeTop: true,
-        child: listView,
+        child: listContent,
       );
     }
 
     Widget result = Container(
       color: backgroundColor,
-      child: listView,
+      child: listContent,
     );
 
     if (!shrinkWrap) {
       result = Expanded(child: result);
+    }
+
+    if (useSliver) {
+      return SliverToBoxAdapter(child: result);
     }
 
     return result;
