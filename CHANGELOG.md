@@ -1,29 +1,46 @@
 # Changelog
 
+## 1.3.0
+
+* Added skeleton loading UI support with shimmer effect
+* Added empty state handling with customizable empty widget
+* Improved documentation with detailed examples
+* Added shimmer package as an optional dependency
+* Updated flutter_lints to ^3.0.1
+* Added comprehensive property documentation
+* Improved code organization and readability
+
 ## 1.2.8
 
-- Updated image URL in README.md to use GitHub Issues image URL for better compatibility
+* Fixed minor documentation issues
+* Updated example code
 
 ## 1.2.7
 
-- Fixed image URL in README.md to display correctly on GitHub and pub.dev
+* Added support for custom item decorations
+* Added support for custom item padding
+* Added support for removing top padding
+* Improved error handling in AsyncValue support
 
 ## 1.2.6
 
-- Fixed image display issues in README.md for both GitHub and pub.dev
-- Updated image path to use absolute URL for better compatibility
+* Added support for custom separators between items
+* Added support for custom scroll physics
+* Improved documentation
 
 ## 1.2.5
 
-- Fixed image display issues in README.md
-- Improved documentation and examples
-- Updated package description
+* Added support for custom background colors
+* Added support for custom content padding
+* Added support for shrinkWrap option
 
 ## 1.2.4
-- Fixed code formatting issues
-- Improved documentation and examples
-- Removed unused file (info_ui_package.dart)
-- Updated package name references
+
+* Initial release with basic functionality
+* Added InfoList widget with generic type support
+* Added InfoCard widget
+* Added InfoHeader widget
+* Added AsyncValue support for Riverpod
 
 ## 1.2.3
 - Updated package documentation and examples

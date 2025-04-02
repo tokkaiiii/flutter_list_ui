@@ -15,6 +15,10 @@ class InfoList<T> extends StatelessWidget {
   final EdgeInsetsGeometry? itemPadding;
   final BoxDecoration? itemDecoration;
   final bool removeTopPadding;
+  final Widget? emptyWidget;
+  final bool isLoading;
+  final int skeletonCount;
+  final Widget Function(BuildContext, int)? skeletonBuilder;
 
   const InfoList({
     required this.items,
@@ -27,6 +31,10 @@ class InfoList<T> extends StatelessWidget {
     this.itemPadding,
     this.itemDecoration,
     this.removeTopPadding = false,
+    this.emptyWidget,
+    this.isLoading = false,
+    this.skeletonCount = 3,
+    this.skeletonBuilder,
     super.key,
   });
 
@@ -41,6 +49,10 @@ class InfoList<T> extends StatelessWidget {
     Widget Function(BuildContext, int)? separatorBuilder,
     ScrollPhysics? physics,
     bool removeTopPadding = false,
+    Widget? emptyWidget,
+    bool isLoading = false,
+    int skeletonCount = 3,
+    Widget Function(BuildContext, int)? skeletonBuilder,
   }) {
     return InfoList<InfoItemBase>(
       key: key,
@@ -51,6 +63,10 @@ class InfoList<T> extends StatelessWidget {
       separatorBuilder: separatorBuilder,
       physics: physics,
       removeTopPadding: removeTopPadding,
+      emptyWidget: emptyWidget,
+      isLoading: isLoading,
+      skeletonCount: skeletonCount,
+      skeletonBuilder: skeletonBuilder,
       buildItem: (item) => _buildDefaultItem(item),
     );
   }
@@ -89,6 +105,10 @@ class InfoList<T> extends StatelessWidget {
     EdgeInsetsGeometry? itemPadding,
     BoxDecoration? itemDecoration,
     bool removeTopPadding = false,
+    Widget? emptyWidget,
+    bool isLoading = false,
+    int skeletonCount = 3,
+    Widget Function(BuildContext, int)? skeletonBuilder,
   }) {
     return value.when(
       data: (items) => InfoList<T>(
@@ -102,8 +122,26 @@ class InfoList<T> extends StatelessWidget {
         itemPadding: itemPadding,
         itemDecoration: itemDecoration,
         removeTopPadding: removeTopPadding,
+        emptyWidget: emptyWidget,
+        isLoading: isLoading,
+        skeletonCount: skeletonCount,
+        skeletonBuilder: skeletonBuilder,
       ),
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => InfoList<T>(
+        items: const [],
+        buildItem: (item) => const SizedBox(),
+        isLoading: true,
+        skeletonCount: skeletonCount,
+        skeletonBuilder: skeletonBuilder,
+        backgroundColor: backgroundColor,
+        contentPadding: contentPadding,
+        shrinkWrap: shrinkWrap,
+        separatorBuilder: separatorBuilder,
+        physics: physics,
+        itemPadding: itemPadding,
+        itemDecoration: itemDecoration,
+        removeTopPadding: removeTopPadding,
+      ),
       error: (error, stack) => Center(
         child: SelectableText.rich(
           TextSpan(
@@ -128,15 +166,106 @@ class InfoList<T> extends StatelessWidget {
     );
   }
 
+  Widget _buildSkeletonItem(BuildContext context, int index) {
+    if (skeletonBuilder != null) {
+      return skeletonBuilder!(context, index);
+    }
+
+    return Container(
+      padding: itemPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: itemDecoration,
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 16,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  width: 100,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return _buildSkeletonList(context);
+    }
+
+    if (items.isEmpty) {
+      return emptyWidget ?? const Center(
+        child: Text('No items found'),
+      );
+    }
+
+    return _buildList(context);
+  }
+
+  Widget _buildSkeletonList(BuildContext context) {
+    Widget listView = ListView.separated(
+      shrinkWrap: shrinkWrap,
+      physics: physics ?? const ClampingScrollPhysics(),
+      padding: contentPadding,
+      itemCount: skeletonCount,
+      separatorBuilder: separatorBuilder ?? (context, index) => const Divider(height: 1),
+      itemBuilder: (context, index) => _buildSkeletonItem(context, index),
+    );
+
+    if (removeTopPadding) {
+      listView = MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: listView,
+      );
+    }
+
+    Widget result = Container(
+      color: backgroundColor,
+      child: listView,
+    );
+
+    if (!shrinkWrap) {
+      result = Expanded(child: result);
+    }
+
+    return result;
+  }
+
+  Widget _buildList(BuildContext context) {
     Widget listView = ListView.separated(
       shrinkWrap: shrinkWrap,
       physics: physics ?? const ClampingScrollPhysics(),
       padding: contentPadding,
       itemCount: items.length,
-      separatorBuilder:
-          separatorBuilder ?? (context, index) => const Divider(height: 1),
+      separatorBuilder: separatorBuilder ?? (context, index) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final item = items[index];
         return Container(
