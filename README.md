@@ -21,7 +21,7 @@ To update this image:
 2. Drag and drop the example.png file into the issue
 3. Copy the generated image URL and replace it here
 -->
-![Image](https://github.com/user-attachments/assets/2fad809f-b502-4722-bf52-6c43ab0e123a)
+![Image](https://github.com/user-attachments/assets/621b58e0-a569-4898-a8c4-6bb716bc3a28)
 
 ## Features
 

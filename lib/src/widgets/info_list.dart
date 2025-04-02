@@ -20,6 +20,7 @@ class InfoList<T> extends StatelessWidget {
   final int skeletonCount;
   final Widget Function(BuildContext, int)? skeletonBuilder;
   final Widget Function(BuildContext, List<T>)? buildEmptyItem;
+  final bool useSliver;
 
   const InfoList({
     required this.items,
@@ -37,6 +38,7 @@ class InfoList<T> extends StatelessWidget {
     this.skeletonCount = 3,
     this.skeletonBuilder,
     this.buildEmptyItem,
+    this.useSliver = false,
     super.key,
   });
 
@@ -56,6 +58,7 @@ class InfoList<T> extends StatelessWidget {
     int skeletonCount = 3,
     Widget Function(BuildContext, int)? skeletonBuilder,
     Widget Function(BuildContext, List<InfoItemBase>)? buildEmptyItem,
+    bool useSliver = false,
   }) {
     return InfoList<InfoItemBase>(
       key: key,
@@ -71,6 +74,7 @@ class InfoList<T> extends StatelessWidget {
       skeletonCount: skeletonCount,
       skeletonBuilder: skeletonBuilder,
       buildEmptyItem: buildEmptyItem,
+      useSliver: useSliver,
       buildItem: (item) => _buildDefaultItem(item),
     );
   }
@@ -269,6 +273,35 @@ class InfoList<T> extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context) {
+    if (useSliver) {
+      return SliverList(
+        delegate: SliverChildListDelegate([
+          LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minWidth: constraints.maxWidth,
+                  ),
+                  child: Row(
+                    children: items.map((item) => SizedBox(
+                      width: 300,
+                      child: Container(
+                        padding: itemPadding,
+                        decoration: itemDecoration,
+                        child: buildItem(item),
+                      ),
+                    )).toList(),
+                  ),
+                ),
+              );
+            },
+          ),
+        ]),
+      );
+    }
+
     Widget listView = ListView.separated(
       shrinkWrap: shrinkWrap,
       physics: physics ?? const ClampingScrollPhysics(),

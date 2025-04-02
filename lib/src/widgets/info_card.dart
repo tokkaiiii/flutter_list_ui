@@ -14,6 +14,7 @@ class InfoCard<T> extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final bool showBorder;
   final Color? borderColor;
+  final bool useSliver;
 
   const InfoCard({
     super.key,
@@ -25,6 +26,7 @@ class InfoCard<T> extends StatelessWidget {
     this.padding,
     this.showBorder = true,
     this.borderColor,
+    this.useSliver = false,
   });
 
   @override
@@ -32,27 +34,44 @@ class InfoCard<T> extends StatelessWidget {
     final theme = Theme.of(context);
     final borderRadius = isRound ? BorderRadius.circular(20) : null;
 
+    final decoration = BoxDecoration(
+      color: backgroundColor ?? theme.cardColor,
+      borderRadius: borderRadius,
+      border: showBorder
+          ? Border.all(
+              color: borderColor ?? theme.dividerColor,
+              width: 1,
+            )
+          : null,
+    );
+
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        header,
+        body,
+      ],
+    );
+
+    if (useSliver) {
+      return SliverToBoxAdapter(
+        child: Container(
+          margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: padding,
+          decoration: decoration,
+          clipBehavior: isRound ? Clip.antiAlias : Clip.none,
+          child: content,
+        ),
+      );
+    }
+
     return Container(
       margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0),
       padding: padding,
-      decoration: BoxDecoration(
-        color: backgroundColor ?? theme.cardColor,
-        borderRadius: borderRadius,
-        border: showBorder
-            ? Border.all(
-                color: borderColor ?? theme.dividerColor,
-                width: 1,
-              )
-            : null,
-      ),
+      decoration: decoration,
       clipBehavior: isRound ? Clip.antiAlias : Clip.none,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          header,
-          body,
-        ],
-      ),
+      child: content,
     );
   }
 }
@@ -72,6 +91,7 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
   final Widget Function(BuildContext, WidgetRef)? builder;
   final bool showBorder;
   final Color? borderColor;
+  final bool useSliver;
 
   const InfoCardWithRiverpod({
     super.key,
@@ -84,6 +104,7 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
     this.builder,
     this.showBorder = true,
     this.borderColor,
+    this.useSliver = false,
   });
 
   @override
@@ -95,27 +116,44 @@ class InfoCardWithRiverpod<T> extends ConsumerWidget {
     final theme = Theme.of(context);
     final borderRadius = isRound ? BorderRadius.circular(20) : null;
 
+    final decoration = BoxDecoration(
+      color: backgroundColor ?? theme.cardColor,
+      borderRadius: borderRadius,
+      border: showBorder
+          ? Border.all(
+              color: borderColor ?? theme.dividerColor,
+              width: 1,
+            )
+          : null,
+    );
+
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        header,
+        body,
+      ],
+    );
+
+    if (useSliver) {
+      return SliverToBoxAdapter(
+        child: Container(
+          margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: padding,
+          decoration: decoration,
+          clipBehavior: isRound ? Clip.antiAlias : Clip.none,
+          child: content,
+        ),
+      );
+    }
+
     return Container(
       margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0),
       padding: padding,
-      decoration: BoxDecoration(
-        color: backgroundColor ?? theme.cardColor,
-        borderRadius: borderRadius,
-        border: showBorder
-            ? Border.all(
-                color: borderColor ?? theme.dividerColor,
-                width: 1,
-              )
-            : null,
-      ),
+      decoration: decoration,
       clipBehavior: isRound ? Clip.antiAlias : Clip.none,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          header,
-          body,
-        ],
-      ),
+      child: content,
     );
   }
 }
