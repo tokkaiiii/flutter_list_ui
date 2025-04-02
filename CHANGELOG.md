@@ -1,11 +1,41 @@
 # Changelog
 
+## 1.3.1
+
+* Added `useSliver` parameter to `InfoList` and `InfoCard` for better scroll performance
+* Added `itemPadding` and `itemDecoration` parameters to `CustomInfoList`
+* Added new example styles: Compact List and Card Style List
+* Added support for horizontal scrolling in sliver mode
+* Fixed infinite width constraint issue in sliver mode
+* Fixed layout issues with `ListTile` in sliver mode
+* Improved layout handling in sliver mode
+* Enhanced example code with more diverse list styles
+* Updated documentation with new features
+
 ## 1.3.0
 
-- Added `buildEmptyItem` parameter to `InfoList` for custom empty state UI
-- Improved documentation with more examples and detailed property descriptions
-- Added shimmer effect example for skeleton loading UI
-- Updated dependencies to latest versions
+* Added `buildEmptyItem` parameter to `InfoList` for custom empty state UI
+* Improved documentation with more examples and detailed property descriptions
+* Added shimmer effect example for skeleton loading UI
+* Updated dependencies to latest versions
+
+
+### Added
+- Added `InfoCard` widget with header and body support
+- Added `InfoHeader` widget for consistent header styling
+- Added support for custom item builders
+- Added support for empty state handling
+
+### Changed
+- Improved documentation
+- Enhanced example code
+
+
+### Added
+- Initial release
+- Basic `InfoList` widget implementation
+- Support for custom item types
+- Basic example implementation
 
 ## 1.2.8
 
