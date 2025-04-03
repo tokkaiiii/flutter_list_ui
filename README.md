@@ -33,6 +33,7 @@ To update this image:
   - Custom item builders
   - Custom separators
   - Custom styling options
+  - Horizontal scrolling support for long text
 - `InfoCard`: A card widget that wraps content with consistent styling
 - `InfoHeader`: A header widget for cards with title and optional actions
 - `InfoItemBase`: A base model for list items with common properties
@@ -43,7 +44,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_list_ui: ^1.3.0
+  flutter_list_ui: ^1.3.2
   shimmer: ^3.0.0  # Optional: for skeleton loading effect
 ```
 
@@ -258,6 +259,55 @@ Info(
     backgroundColor: Colors.white,
     isRound: true,
     showBorder: false,
+  ),
+);
+```
+
+### With Horizontal Scrolling
+
+```dart
+CustomInfoList(
+  items: items,
+  useSliver: true,
+  buildItem: (item) => SizedBox(
+    width: 300,
+    child: SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: Row(
+          children: [
+            Icon(
+              item.isActive ? Icons.check_circle : Icons.circle_outlined,
+              color: item.isActive ? Colors.blue : null,
+            ),
+            const SizedBox(width: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.name,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: item.isActive ? Colors.blue : null,
+                  ),
+                  overflow: TextOverflow.clip,
+                  softWrap: false,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  item.description,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  overflow: TextOverflow.clip,
+                  softWrap: false,
+                ),
+              ],
+            ),
+            const SizedBox(width: 16),
+            const Icon(Icons.chevron_right),
+          ],
+        ),
+      ),
+    ),
   ),
 );
 ```
