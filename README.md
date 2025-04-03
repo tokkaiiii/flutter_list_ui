@@ -264,45 +264,139 @@ Info(
 
 ## Additional Information
 
-### InfoList Properties
+### Info Widget Properties
 
 | Property | Type | Description |
 |----------|------|-------------|
-| items | List<T> | The list of items to display |
-| buildItem | Widget Function(T) | Function to build each item widget |
-| backgroundColor | Color? | Background color of the list |
-| contentPadding | EdgeInsetsGeometry? | Padding around the list content |
-| shrinkWrap | bool | Whether the list should shrink-wrap its content |
-| separatorBuilder | Widget Function(BuildContext, int)? | Function to build separator widgets |
-| physics | ScrollPhysics? | Scroll physics for the list |
-| itemPadding | EdgeInsetsGeometry? | Padding for each item |
-| itemDecoration | BoxDecoration? | Decoration for each item container |
-| removeTopPadding | bool | Whether to remove top padding |
-| emptyWidget | Widget? | Widget to show when items is empty |
-| isLoading | bool | Whether to show skeleton loading UI |
-| skeletonCount | int | Number of skeleton items to show |
-| skeletonBuilder | Widget Function(BuildContext, int)? | Function to build skeleton items |
-| buildEmptyItem | Widget Function(BuildContext, List<T>)? | Function to build empty state UI |
+| card | InfoCard | The InfoCard widget to display |
+| paddingOption | String | Padding option ('all' or 'symmetric', default: 'all') |
+| paddingVertical | double | Vertical padding value (default: 8.0) |
+| paddingHorizontal | double | Horizontal padding value (default: 8.0) |
 
-### InfoCard Properties
+### InfoCard Widget Properties
 
 | Property | Type | Description |
 |----------|------|-------------|
-| header | InfoHeader? | Header widget for the card |
-| body | Widget | Main content of the card |
-| backgroundColor | Color? | Background color of the card |
-| isRound | bool | Whether to show rounded corners |
-| showBorder | bool | Whether to show border |
-| padding | EdgeInsetsGeometry? | Padding around the card content |
+| header | InfoHeaderBase | Header widget |
+| body | InfoList<T> | Main content widget |
+| isRound | bool | Whether to show rounded corners (default: false) |
+| backgroundColor | Color? | Background color |
 | margin | EdgeInsetsGeometry? | Margin around the card |
+| padding | EdgeInsetsGeometry? | Padding around the content |
+| showBorder | bool | Whether to show border (default: true) |
+| borderColor | Color? | Border color |
+| useSliver | bool | Whether to use SliverList (default: false) |
 
-### InfoHeader Properties
+### InfoHeader Widget Properties
 
 | Property | Type | Description |
 |----------|------|-------------|
 | title | String | Title text |
+| subtitle | String? | Optional subtitle text |
+| trailing | Widget? | Optional trailing widget |
 | titleStyle | TextStyle? | Style for the title text |
-| actions | List<Widget>? | Action widgets to show in the header |
+| subtitleStyle | TextStyle? | Style for the subtitle text |
+| backgroundColor | Color? | Background color |
+| padding | EdgeInsetsGeometry? | Padding around the content |
+
+### InfoList Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| items | List<T> | List of items to display |
+| buildItem | Widget Function(T) | Function to build each item |
+| backgroundColor | Color? | Background color |
+| contentPadding | EdgeInsetsGeometry? | Padding around the list content |
+| shrinkWrap | bool | Whether the list should shrink-wrap its content (default: true) |
+| separatorBuilder | Widget Function(BuildContext, int)? | Function to build separator widgets |
+| physics | ScrollPhysics? | Scroll physics for the list |
+| itemPadding | EdgeInsetsGeometry? | Padding for each item |
+| itemDecoration | BoxDecoration? | Decoration for each item container |
+| removeTopPadding | bool | Whether to remove top padding (default: false) |
+| emptyWidget | Widget? | Widget to show when items is empty |
+| isLoading | bool | Whether to show skeleton loading UI (default: false) |
+| skeletonCount | int | Number of skeleton items to show (default: 3) |
+| skeletonBuilder | Widget Function(BuildContext, int)? | Function to build skeleton items |
+| buildEmptyItem | Widget Function(BuildContext, List<T>)? | Function to build empty state UI |
+| useSliver | bool | Whether to use SliverList (default: false) |
+
+### InfoCardWithRiverpod Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| header | InfoHeaderBase | Header widget |
+| body | InfoList<T> | Main content widget |
+| isRound | bool | Whether to show rounded corners (default: false) |
+| backgroundColor | Color? | Background color |
+| margin | EdgeInsetsGeometry? | Margin around the card |
+| padding | EdgeInsetsGeometry? | Padding around the content |
+| builder | Widget Function(BuildContext, WidgetRef)? | Custom builder function |
+| showBorder | bool | Whether to show border (default: true) |
+| borderColor | Color? | Border color |
+| useSliver | bool | Whether to use SliverList (default: false) |
+
+### InfoListWithRiverpod Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| items | List<T> | List of items to display |
+| buildItem | Widget Function(T) | Function to build each item |
+| backgroundColor | Color? | Background color |
+| contentPadding | EdgeInsetsGeometry? | Padding around the list content |
+| shrinkWrap | bool | Whether the list should shrink-wrap its content (default: true) |
+| separatorBuilder | Widget Function(BuildContext, int)? | Function to build separator widgets |
+| physics | ScrollPhysics? | Scroll physics for the list |
+| itemPadding | EdgeInsetsGeometry? | Padding for each item |
+| itemDecoration | BoxDecoration? | Decoration for each item container |
+| removeTopPadding | bool | Whether to remove top padding (default: false) |
+| emptyWidget | Widget? | Widget to show when items is empty |
+| isLoading | bool | Whether to show skeleton loading UI (default: false) |
+| skeletonCount | int | Number of skeleton items to show (default: 3) |
+| skeletonBuilder | Widget Function(BuildContext, int)? | Function to build skeleton items |
+| buildEmptyItem | Widget Function(BuildContext, List<T>)? | Function to build empty state UI |
+| useSliver | bool | Whether to use SliverList (default: false) |
+
+### CustomInfoList Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| items | List<T> | List of items to display |
+| buildItem | Widget Function(T) | Function to build each item |
+| backgroundColor | Color? | Background color |
+| contentPadding | EdgeInsetsGeometry? | Padding around the list content |
+| shrinkWrap | bool | Whether the list should shrink-wrap its content (default: true) |
+| separatorBuilder | Widget Function(BuildContext, int)? | Function to build separator widgets |
+| physics | ScrollPhysics? | Scroll physics for the list |
+| itemPadding | EdgeInsetsGeometry? | Padding for each item |
+| itemDecoration | BoxDecoration? | Decoration for each item container |
+| removeTopPadding | bool | Whether to remove top padding (default: false) |
+| emptyWidget | Widget? | Widget to show when items is empty |
+| isLoading | bool | Whether to show skeleton loading UI (default: false) |
+| skeletonCount | int | Number of skeleton items to show (default: 3) |
+| skeletonBuilder | Widget Function(BuildContext, int)? | Function to build skeleton items |
+| buildEmptyItem | Widget Function(BuildContext, List<T>)? | Function to build empty state UI |
+| useSliver | bool | Whether to use SliverList (default: false) |
+
+### CustomInfoListWithRiverpod Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| items | List<T> | List of items to display |
+| buildItem | Widget Function(T) | Function to build each item |
+| backgroundColor | Color? | Background color |
+| contentPadding | EdgeInsetsGeometry? | Padding around the list content |
+| shrinkWrap | bool | Whether the list should shrink-wrap its content (default: true) |
+| separatorBuilder | Widget Function(BuildContext, int)? | Function to build separator widgets |
+| physics | ScrollPhysics? | Scroll physics for the list |
+| itemPadding | EdgeInsetsGeometry? | Padding for each item |
+| itemDecoration | BoxDecoration? | Decoration for each item container |
+| removeTopPadding | bool | Whether to remove top padding (default: false) |
+| emptyWidget | Widget? | Widget to show when items is empty |
+| isLoading | bool | Whether to show skeleton loading UI (default: false) |
+| skeletonCount | int | Number of skeleton items to show (default: 3) |
+| skeletonBuilder | Widget Function(BuildContext, int)? | Function to build skeleton items |
+| buildEmptyItem | Widget Function(BuildContext, List<T>)? | Function to build empty state UI |
+| useSliver | bool | Whether to use SliverList (default: false) |
 
 ## Dependencies
 

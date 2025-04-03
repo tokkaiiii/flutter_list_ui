@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.8
+
+* Reverted to stable version with improved functionality
+* Fixed UI consistency issues
+* Enhanced documentation and examples
+* Updated package dependencies
+
 ## 1.3.1
 
 * Added `useSliver` parameter to `InfoList` and `InfoCard` for better scroll performance
