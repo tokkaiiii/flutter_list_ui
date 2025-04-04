@@ -182,7 +182,8 @@ class InfoList<T> extends StatelessWidget {
     }
 
     return Container(
-      padding: itemPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: itemPadding ??
+          const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: itemDecoration,
       child: Row(
         children: [
@@ -234,9 +235,10 @@ class InfoList<T> extends StatelessWidget {
       if (buildEmptyItem != null) {
         return buildEmptyItem!(context, items);
       }
-      return emptyWidget ?? const Center(
-        child: Text('No items found'),
-      );
+      return emptyWidget ??
+          const Center(
+            child: Text('No items found'),
+          );
     }
 
     return _buildList(context);
@@ -248,7 +250,8 @@ class InfoList<T> extends StatelessWidget {
       physics: physics ?? const ClampingScrollPhysics(),
       padding: contentPadding,
       itemCount: skeletonCount,
-      separatorBuilder: separatorBuilder ?? (context, index) => const Divider(height: 1),
+      separatorBuilder:
+          separatorBuilder ?? (context, index) => const Divider(height: 1),
       itemBuilder: (context, index) => _buildSkeletonItem(context, index),
     );
 
@@ -285,14 +288,16 @@ class InfoList<T> extends StatelessWidget {
                     minWidth: constraints.maxWidth,
                   ),
                   child: Row(
-                    children: items.map((item) => SizedBox(
-                      width: 300,
-                      child: Container(
-                        padding: itemPadding,
-                        decoration: itemDecoration,
-                        child: buildItem(item),
-                      ),
-                    )).toList(),
+                    children: items
+                        .map((item) => SizedBox(
+                              width: 300,
+                              child: Container(
+                                padding: itemPadding,
+                                decoration: itemDecoration,
+                                child: buildItem(item),
+                              ),
+                            ))
+                        .toList(),
                   ),
                 ),
               );
@@ -307,7 +312,8 @@ class InfoList<T> extends StatelessWidget {
       physics: physics ?? const ClampingScrollPhysics(),
       padding: contentPadding,
       itemCount: items.length,
-      separatorBuilder: separatorBuilder ?? (context, index) => const Divider(height: 1),
+      separatorBuilder:
+          separatorBuilder ?? (context, index) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final item = items[index];
         return Container(
