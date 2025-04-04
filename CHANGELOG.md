@@ -1,10 +1,25 @@
 # Changelog
 
+## 1.4.1
+
+* Fixed repository URL for pub.dev verification
+* Improved package documentation
+* Enhanced pub.dev compatibility
+
+## 1.4.0
+
+* Improved Windows compatibility
+* Removed unused assets configuration
+* Added comprehensive Windows troubleshooting guide
+* Enhanced documentation for cross-platform support
+* Optimized package structure for better performance
+
 ## 1.3.9
 
-* Added Windows compatibility settings to fix file lock issues during pub get
-* Updated pubspec.yaml with publish_config settings
-* Improved cross-platform compatibility
+* Removed unused assets configuration
+* Added Windows troubleshooting guide to README.md
+* Improved documentation for Windows users
+* Updated package dependencies
 
 ## 1.3.8
 
