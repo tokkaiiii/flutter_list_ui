@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.9
+
+* Added Windows compatibility settings to fix file lock issues during pub get
+* Updated pubspec.yaml with publish_config settings
+* Improved cross-platform compatibility
+
 ## 1.3.8
 
 * Reverted to stable version with improved functionality
