@@ -1,6 +1,6 @@
 name: flutter_list_ui
-description: A Flutter package that provides a collection of list-related widgets with consistent styling and behavior.
-version: 1.4.1
+description: A powerful Flutter package for creating beautiful and customizable list UIs with cards, headers, and async data support. Features include Material Design 3, Riverpod integration, shimmer loading, and cross-platform compatibility. #flutter #ui #list #card #materialdesign #riverpod #async #loading #shimmer #crossplatform
+version: 1.4.2
 homepage: https://github.com/tokkaiiii/flutter_list_ui
 repository: https://github.com/tokkaiiii/flutter_list_ui.git
 

@@ -1,10 +1,21 @@
 # Changelog
 
+## 1.4.2
+
+* Added example images to showcase package features
+* Improved README.md with better visual documentation
+* Enhanced package discoverability with example screenshots
+* Updated documentation with visual examples
+
 ## 1.4.1
 
 * Fixed repository URL for pub.dev verification
-* Improved package documentation
-* Enhanced pub.dev compatibility
+* Added search hashtags to package description
+* Added example images to README.md
+* Improved package documentation with better search keywords
+* Enhanced pub.dev compatibility and discoverability
+* Added comprehensive feature list in README.md
+* Optimized package metadata for better search results
 
 ## 1.4.0
 
