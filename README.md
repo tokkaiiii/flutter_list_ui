@@ -11,55 +11,400 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-# Flutter List UI - Beautiful and Customizable List Components
+# Flutter List UI
 
-A powerful Flutter package for creating beautiful and customizable list UIs with cards, headers, and async data support. Perfect for building modern Flutter applications with Material Design 3.
+A Flutter package that provides a collection of list-related widgets with consistent styling and behavior.
 
+<!--
+To update this image:
+1. Create a new issue in this repository
+2. Drag and drop the example.png file into the issue
+3. Copy the generated image URL and replace it here
+-->
 ![Image](https://github.com/user-attachments/assets/db12dc53-322e-431d-b92f-a29f9ecf42fc)
 
 ## Features
 
-- 🎨 **Material Design 3 Support**: Modern and beautiful UI components
-- 📱 **Responsive Design**: Works on all screen sizes
-- 🔄 **Async Data Support**: Built-in support for loading states
-- 🎯 **Riverpod Integration**: Seamless state management
-- 💫 **Shimmer Loading**: Beautiful loading animations
-- 🎭 **Customizable**: Extensive styling options
-- 🌐 **Cross-Platform**: Works on iOS, Android, and Web
+- `InfoList`: A flexible list widget that supports:
+  - Generic type support for any data model
+  - Empty state handling with customizable UI
+  - Skeleton loading UI with shimmer effect
+  - AsyncValue integration with Riverpod
+  - Custom item builders
+  - Custom separators
+  - Custom styling options
+- `InfoCard`: A card widget that wraps content with consistent styling
+- `InfoHeader`: A header widget for cards with title and optional actions
+- `InfoItemBase`: A base model for list items with common properties
 
-## Installation
+## Getting Started
 
-Add the following to your `pubspec.yaml`:
+Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_list_ui: ^1.4.1
+  flutter_list_ui: ^1.4.2
+  shimmer: ^3.0.0  # Optional: for skeleton loading effect
 ```
 
-## Quick Start
+## Usage
+
+### Basic List
 
 ```dart
-import 'package:flutter_list_ui/flutter_list_ui.dart';
-
-// Create a beautiful list with cards
-InfoList(
-  items: yourItems,
-  itemBuilder: (context, item) => InfoCard(
-    header: InfoHeader(title: item.title),
-    body: Text(item.description),
+InfoList.info(
+  items: items,
+  buildItem: (item) => ListTile(
+    title: Text(item.title),
+    subtitle: Text(item.subtitle),
   ),
 );
 ```
 
-## Documentation
+### With Empty State
 
-- [Getting Started](https://github.com/tokkaiiii/flutter_list_ui#getting-started)
-- [API Reference](https://github.com/tokkaiiii/flutter_list_ui#api-reference)
-- [Examples](https://github.com/tokkaiiii/flutter_list_ui#examples)
+```dart
+InfoList.info(
+  items: items,
+  buildEmptyItem: (context, items) => Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.inbox_outlined,
+          size: 48,
+          color: Colors.grey[400],
+        ),
+        const SizedBox(height: 16),
+        Text(
+          '데이터가 없습니다',
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 16,
+          ),
+        ),
+      ],
+    ),
+  ),
+  buildItem: (item) => ListTile(
+    title: Text(item.title),
+    subtitle: Text(item.subtitle),
+  ),
+);
+```
 
-## Windows Users
+### With Skeleton Loading
 
-// ... existing Windows troubleshooting section ...
+```dart
+InfoList.info(
+  items: items,
+  isLoading: true,
+  skeletonCount: 3,
+  skeletonBuilder: (context, index) => Container(
+    padding: const EdgeInsets.all(16),
+    child: Row(
+      children: [
+        Container(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                width: 150,
+                height: 16,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  ),
+);
+```
+
+### With Riverpod AsyncValue
+
+```dart
+InfoList.when(
+  value: itemsAsyncValue,
+  buildItem: (item) => ListTile(
+    title: Text(item.title),
+    subtitle: Text(item.subtitle),
+  ),
+  buildEmptyItem: (context, items) => Container(
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.search_off,
+          size: 48,
+          color: Colors.grey[400],
+        ),
+        const SizedBox(height: 16),
+        Text(
+          '검색 결과가 없습니다',
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 16,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          '다른 검색어를 시도해보세요',
+          style: TextStyle(
+            color: Colors.grey[500],
+            fontSize: 14,
+          ),
+        ),
+      ],
+    ),
+  ),
+);
+```
+
+### With Shimmer Effect
+
+```dart
+import 'package:shimmer/shimmer.dart';
+
+InfoList.info(
+  items: items,
+  isLoading: true,
+  skeletonBuilder: (context, index) => Shimmer.fromColors(
+    baseColor: Colors.grey[300]!,
+    highlightColor: Colors.grey[100]!,
+    child: Container(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  width: 150,
+                  height: 16,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+);
+```
+
+### With InfoCard
+
+```dart
+Info(
+  card: InfoCard(
+    header: InfoHeader(
+      title: 'List Title',
+      titleStyle: Theme.of(context).textTheme.titleLarge,
+    ),
+    body: InfoList.info(
+      items: items,
+      buildItem: (item) => ListTile(
+        title: Text(item.title),
+        subtitle: Text(item.subtitle),
+      ),
+    ),
+    backgroundColor: Colors.white,
+    isRound: true,
+    showBorder: false,
+  ),
+);
+```
+
+## Additional Information
+
+### Info Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| card | InfoCard | The InfoCard widget to display |
+| paddingOption | String | Padding option ('all' or 'symmetric', default: 'all') |
+| paddingVertical | double | Vertical padding value (default: 8.0) |
+| paddingHorizontal | double | Horizontal padding value (default: 8.0) |
+
+### InfoCard Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| header | InfoHeaderBase | Header widget |
+| body | InfoList<T> | Main content widget |
+| isRound | bool | Whether to show rounded corners (default: false) |
+| backgroundColor | Color? | Background color |
+| margin | EdgeInsetsGeometry? | Margin around the card |
+| padding | EdgeInsetsGeometry? | Padding around the content |
+| showBorder | bool | Whether to show border (default: true) |
+| borderColor | Color? | Border color |
+| useSliver | bool | Whether to use SliverList (default: false) |
+
+### InfoHeader Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| title | String | Title text |
+| subtitle | String? | Optional subtitle text |
+| trailing | Widget? | Optional trailing widget |
+| titleStyle | TextStyle? | Style for the title text |
+| subtitleStyle | TextStyle? | Style for the subtitle text |
+| backgroundColor | Color? | Background color |
+| padding | EdgeInsetsGeometry? | Padding around the content |
+
+### InfoList Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| items | List<T> | List of items to display |
+| buildItem | Widget Function(T) | Function to build each item |
+| backgroundColor | Color? | Background color |
+| contentPadding | EdgeInsetsGeometry? | Padding around the list content |
+| shrinkWrap | bool | Whether the list should shrink-wrap its content (default: true) |
+| separatorBuilder | Widget Function(BuildContext, int)? | Function to build separator widgets |
+| physics | ScrollPhysics? | Scroll physics for the list |
+| itemPadding | EdgeInsetsGeometry? | Padding for each item |
+| itemDecoration | BoxDecoration? | Decoration for each item container |
+| removeTopPadding | bool | Whether to remove top padding (default: false) |
+| emptyWidget | Widget? | Widget to show when items is empty |
+| isLoading | bool | Whether to show skeleton loading UI (default: false) |
+| skeletonCount | int | Number of skeleton items to show (default: 3) |
+| skeletonBuilder | Widget Function(BuildContext, int)? | Function to build skeleton items |
+| buildEmptyItem | Widget Function(BuildContext, List<T>)? | Function to build empty state UI |
+| useSliver | bool | Whether to use SliverList (default: false) |
+
+### InfoCardWithRiverpod Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| header | InfoHeaderBase | Header widget |
+| body | InfoList<T> | Main content widget |
+| isRound | bool | Whether to show rounded corners (default: false) |
+| backgroundColor | Color? | Background color |
+| margin | EdgeInsetsGeometry? | Margin around the card |
+| padding | EdgeInsetsGeometry? | Padding around the content |
+| builder | Widget Function(BuildContext, WidgetRef)? | Custom builder function |
+| showBorder | bool | Whether to show border (default: true) |
+| borderColor | Color? | Border color |
+| useSliver | bool | Whether to use SliverList (default: false) |
+
+### InfoListWithRiverpod Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| items | List<T> | List of items to display |
+| buildItem | Widget Function(T) | Function to build each item |
+| backgroundColor | Color? | Background color |
+| contentPadding | EdgeInsetsGeometry? | Padding around the list content |
+| shrinkWrap | bool | Whether the list should shrink-wrap its content (default: true) |
+| separatorBuilder | Widget Function(BuildContext, int)? | Function to build separator widgets |
+| physics | ScrollPhysics? | Scroll physics for the list |
+| itemPadding | EdgeInsetsGeometry? | Padding for each item |
+| itemDecoration | BoxDecoration? | Decoration for each item container |
+| removeTopPadding | bool | Whether to remove top padding (default: false) |
+| emptyWidget | Widget? | Widget to show when items is empty |
+| isLoading | bool | Whether to show skeleton loading UI (default: false) |
+| skeletonCount | int | Number of skeleton items to show (default: 3) |
+| skeletonBuilder | Widget Function(BuildContext, int)? | Function to build skeleton items |
+| buildEmptyItem | Widget Function(BuildContext, List<T>)? | Function to build empty state UI |
+| useSliver | bool | Whether to use SliverList (default: false) |
+
+### CustomInfoList Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| items | List<T> | List of items to display |
+| buildItem | Widget Function(T) | Function to build each item |
+| backgroundColor | Color? | Background color |
+| contentPadding | EdgeInsetsGeometry? | Padding around the list content |
+| shrinkWrap | bool | Whether the list should shrink-wrap its content (default: true) |
+| separatorBuilder | Widget Function(BuildContext, int)? | Function to build separator widgets |
+| physics | ScrollPhysics? | Scroll physics for the list |
+| itemPadding | EdgeInsetsGeometry? | Padding for each item |
+| itemDecoration | BoxDecoration? | Decoration for each item container |
+| removeTopPadding | bool | Whether to remove top padding (default: false) |
+| emptyWidget | Widget? | Widget to show when items is empty |
+| isLoading | bool | Whether to show skeleton loading UI (default: false) |
+| skeletonCount | int | Number of skeleton items to show (default: 3) |
+| skeletonBuilder | Widget Function(BuildContext, int)? | Function to build skeleton items |
+| buildEmptyItem | Widget Function(BuildContext, List<T>)? | Function to build empty state UI |
+| useSliver | bool | Whether to use SliverList (default: false) |
+
+### CustomInfoListWithRiverpod Widget Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| items | List<T> | List of items to display |
+| buildItem | Widget Function(T) | Function to build each item |
+| backgroundColor | Color? | Background color |
+| contentPadding | EdgeInsetsGeometry? | Padding around the list content |
+| shrinkWrap | bool | Whether the list should shrink-wrap its content (default: true) |
+| separatorBuilder | Widget Function(BuildContext, int)? | Function to build separator widgets |
+| physics | ScrollPhysics? | Scroll physics for the list |
+| itemPadding | EdgeInsetsGeometry? | Padding for each item |
+| itemDecoration | BoxDecoration? | Decoration for each item container |
+| removeTopPadding | bool | Whether to remove top padding (default: false) |
+| emptyWidget | Widget? | Widget to show when items is empty |
+| isLoading | bool | Whether to show skeleton loading UI (default: false) |
+| skeletonCount | int | Number of skeleton items to show (default: 3) |
+| skeletonBuilder | Widget Function(BuildContext, int)? | Function to build skeleton items |
+| buildEmptyItem | Widget Function(BuildContext, List<T>)? | Function to build empty state UI |
+| useSliver | bool | Whether to use SliverList (default: false) |
+
+## Dependencies
+
+- flutter_riverpod: ^2.5.1 (Required for AsyncValue support)
+- flutter_screenutil: ^5.9.0
+- google_fonts: ^6.1.0
+- cached_network_image: ^3.3.1
+- shimmer: ^3.0.0 (Optional: for skeleton loading effect)
 
 ## Contributing
 
@@ -67,8 +412,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Keywords
+## About
 
-Flutter, UI, List, Card, Material Design, Riverpod, Async, Loading, Shimmer, Cross-Platform
+A reusable Flutter UI components package
