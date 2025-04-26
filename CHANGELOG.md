@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.4
+
+* Added ScrollController support to InfoList widget
+* Enhanced scroll control functionality
+* Improved list interaction capabilities
+
 ## 1.4.3
 
 * Updated README.md with detailed documentation

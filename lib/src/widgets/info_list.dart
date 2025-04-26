@@ -21,6 +21,7 @@ class InfoList<T> extends StatelessWidget {
   final Widget Function(BuildContext, int)? skeletonBuilder;
   final Widget Function(BuildContext, List<T>)? buildEmptyItem;
   final bool useSliver;
+  final ScrollController? controller;
 
   const InfoList({
     required this.items,
@@ -39,6 +40,7 @@ class InfoList<T> extends StatelessWidget {
     this.skeletonBuilder,
     this.buildEmptyItem,
     this.useSliver = false,
+    this.controller,
     super.key,
   });
 
@@ -59,6 +61,7 @@ class InfoList<T> extends StatelessWidget {
     Widget Function(BuildContext, int)? skeletonBuilder,
     Widget Function(BuildContext, List<InfoItemBase>)? buildEmptyItem,
     bool useSliver = false,
+    ScrollController? controller,
   }) {
     return InfoList<InfoItemBase>(
       key: key,
@@ -75,6 +78,7 @@ class InfoList<T> extends StatelessWidget {
       skeletonBuilder: skeletonBuilder,
       buildEmptyItem: buildEmptyItem,
       useSliver: useSliver,
+      controller: controller,
       buildItem: (item) => _buildDefaultItem(item),
     );
   }
@@ -250,6 +254,7 @@ class InfoList<T> extends StatelessWidget {
       physics: physics ?? const ClampingScrollPhysics(),
       padding: contentPadding,
       itemCount: skeletonCount,
+      controller: controller,
       separatorBuilder:
           separatorBuilder ?? (context, index) => const Divider(height: 1),
       itemBuilder: (context, index) => _buildSkeletonItem(context, index),
@@ -283,6 +288,7 @@ class InfoList<T> extends StatelessWidget {
             builder: (context, constraints) {
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
+                controller: controller,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     minWidth: constraints.maxWidth,
@@ -312,6 +318,7 @@ class InfoList<T> extends StatelessWidget {
       physics: physics ?? const ClampingScrollPhysics(),
       padding: contentPadding,
       itemCount: items.length,
+      controller: controller,
       separatorBuilder:
           separatorBuilder ?? (context, index) => const Divider(height: 1),
       itemBuilder: (context, index) {
