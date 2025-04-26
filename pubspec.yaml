@@ -1,4 +1,4 @@
-name: info_ui
+name: flutter_list_ui
 description: A Flutter package providing a collection of list-related widgets with consistent styling and behavior. #flutter #ui #list #card #materialdesign #riverpod #async #loading #shimmer #crossplatform
 version: 1.4.4
 homepage: https://github.com/tokkaiiii/flutter_list_ui
